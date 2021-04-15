@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title>Add Data</title>
+</head>
+ 
+<body>
+    <a href="admin_gear.php">Home</a>
+    <br/><br/>
+ 
+    <form action="add_new_gear.php" method="post" enctype="multipart/form-data" name="form1">
+        <table width="25%" border="0">
+            <tr> 
+                <td>gear_id</td>
+                <td><input type="text" name="gear_id"></td>
+            </tr>
+            <tr> 
+                <td>gear_name</td>
+                <td><input type="text" name="gear_name"></td>
+            </tr>
+            <tr> 
+                <td>category</td>
+                <td><input type="text" name="category"></td>
+            </tr>
+            <tr> 
+                <td>description</td>
+                <td><input type="text" name="desp"></td>
+            </tr>
+            <tr> 
+                <td>price</td>
+                <td><input type="text" name="price"></td>
+            </tr>
+            <tr> 
+                <td>Image:<input type="file" name="photo" accept="image/jpeg"></td>
+            </tr>
+            <tr> 
+                <td></td>
+                <td><input type="submit" name="Submit" value="Add"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
