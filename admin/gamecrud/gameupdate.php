@@ -89,7 +89,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         $id =  trim($_GET["id"]);
 
         // Prepare a select statement
-        $sql = "SELECT * FROM product WHERE id = :id";
+        $sql = "SELECT * FROM gamestore WHERE id = :id";
         if($stmt = $pdo->prepare($sql)){
             // Bind variables to the prepared statement as parameters
             $stmt->bindParam(":id", $param_id);
@@ -111,7 +111,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                     $gamecat= $row["gamecat"];
                 } else{
                     // URL doesn't contain valid id. Redirect to error page
-                    header("location: error.php");
+                    header("location: gameerror.php");
                     exit();
                 }
 
@@ -127,7 +127,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         unset($pdo);
     }  else{
         // URL doesn't contain id parameter. Redirect to error page
-        header("location: error.php");
+        header("location: gameerror.php");
         exit();
     }
 }
