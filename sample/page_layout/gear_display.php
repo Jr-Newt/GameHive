@@ -58,6 +58,10 @@
 </div>
     </div>
 
+     <div class="content-body">
+    <div class="side-filter">
+    
+    </div>
     <div class="main-content">
     <div class="each-product">
         <div class="image"><img src="..\images\ac.jpg" alt="" style="width:100%"></div>
@@ -85,6 +89,7 @@
         <div class="details"><button style="width:75%;">view</button><div>Price</div></div>
     </div>
     </div>
+    
     
 </body>
 </html>
