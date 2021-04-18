@@ -3,8 +3,8 @@
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$name = $description = $price = $gearcat = $gearimage = "";
-$name_err = $description_err = $price_err = $gearcat_err = $gearimage_err = "";
+$name = $description = $price = $gamecat = $gameimage = "";
+$name_err = $description_err = $price_err = $gamecat_err = $gameimage_err = "";
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -21,7 +21,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate address
     $input_description = trim($_POST["description"]);
     if(empty($input_description)){
-        $description_err = "Please enter product description.";
+        $description_err = "Please enter Game description.";
     } else{
         $description = $input_description;
     }
@@ -29,7 +29,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate salary
     $input_price = trim($_POST["price"]);
     if(empty($input_price)){
-        $price_err = "Please enter the price amount.";
+        $price_err = "Please enter the price of game.";
     } elseif(!ctype_digit($input_price)){
         $price_err = "Please enter a positive integer value.";
     } else{
@@ -37,48 +37,48 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     // Validate category
-    $input_gearcat = trim($_POST["gearcat"]);
-    if(empty($input_gearcat)){
-        $gearcat_err = "Please enter product description.";
+    $input_gamecat = trim($_POST["gamecat"]);
+    if(empty($input_gamecat)){
+        $gamecat_err = "Please enter game category.";
     } else{
-        $gearcat = $input_gearcat;
+        $gamecat = $input_gamecat;
     }
 
     //Validate image
-    $filename = $_FILES['gearimage']['name'];
+    $filename = $_FILES['gameimage']['name'];
     if(!empty($filename)){
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
         $new_filename = $name.'.'.$ext;
-        move_uploaded_file($_FILES['gearimage']['tmp_name'], '../images/'.$new_filename);
+        move_uploaded_file($_FILES['gameimage']['tmp_name'], '../images/'.$new_filename);
     }
     else{
         $new_filename = '';
     }
 
     // Check input errors before inserting in database
-    if(empty($name_err) && empty($description_err) && empty($price_err) && empty($gearcat_err)){
+    if(empty($name_err) && empty($description_err) && empty($price_err) && empty($gamecat_err)){
         // Prepare an insert statement
-        $sql = "INSERT INTO product (name, description, price, gearcat, gearimage) VALUES (:name, :description, :price, :gearcat, :gearimage)";
+        $sql = "INSERT INTO gamestore (name, description, price, gamecat, gameimage) VALUES (:name, :description, :price, :gamecat, :gameimage)";
 
         if($stmt = $pdo->prepare($sql)){
             // Bind variables to the prepared statement as parameters
             $stmt->bindParam(":name", $param_name);
             $stmt->bindParam(":description", $param_description);
             $stmt->bindParam(":price", $param_price);
-            $stmt->bindParam(":gearcat", $param_gearcat);
-            $stmt->bindParam(":gearimage", $param_gearimage);
+            $stmt->bindParam(":gamecat", $param_gamecat);
+            $stmt->bindParam(":gameimage", $param_gameimage);
 
             // Set parameters
             $param_name = $name;
             $param_description = $description;
             $param_price = $price;
-            $param_gearcat = $gearcat;
-            $param_gearimage = $new_filename;
+            $param_gamecat = $gamecat;
+            $param_gameimage = $new_filename;
 
             // Attempt to execute the prepared statement
             if($stmt->execute()){
                 // Records created successfully. Redirect to landing page
-                header("location: index.php");
+                header("location: gameindex.php");
                 exit();
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
@@ -121,6 +121,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <span class="invalid-feedback"><?php echo $name_err;?></span>
                         </div>
                         <div class="form-group">
+
                             <label>Description</label>
                             <textarea name="description" class="form-control <?php echo (!empty($description_err)) ? 'is-invalid' : ''; ?>"><?php echo $description; ?></textarea>
                             <span class="invalid-feedback"><?php echo $description_err;?></span>
@@ -132,14 +133,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
                         <div class="form-group">
                             <label>Category</label>
-                            <input type="text" name="gearcat" class="form-control <?php echo (!empty($gearcat_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $gearcat; ?>">
-                            <span class="invalid-feedback"><?php echo $gearcat;?></span>
+                            <input type="text" name="gamecat" class="form-control <?php echo (!empty($gamecat_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $gamecat; ?>">
+                            <span class="invalid-feedback"><?php echo $gamecat;?></span>
                         </div>
                         <tr>
-                            <td>Image:<input type="file" name="gearimage" accept="image/jpeg"></td>
+                            <td>Image:<input type="file" name="gameimage" accept="image/jpeg"></td>
                         </tr>
                         <input type="submit" class="btn btn-primary" value="Submit">
-                        <a href="index.php" class="btn btn-secondary ml-2">Cancel</a>
+                        <a href="gameindex.php" class="btn btn-secondary ml-2">Cancel</a>
                     </form>
                 </div>
             </div>
