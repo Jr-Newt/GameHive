@@ -31,8 +31,8 @@
           Products
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="admin_gear.php">Gear Store</a>
-          <a class="dropdown-item" href="#">Game Store</a>
+          <a class="dropdown-item" href="gearcrud/gearindex.php">Gear Store</a>
+          <a class="dropdown-item" href="gamecrud/gameindex.php">Game Store</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Something else here</a>
         </div>

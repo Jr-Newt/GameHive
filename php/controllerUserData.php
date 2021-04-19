@@ -29,7 +29,7 @@ if(isset($_POST['signup'])){
         if($data_check){
             $subject = "Email Verification Code";
             $message = "Your verification code is $code";
-            $sender = "From: shahiprem7890@gmail.com";
+            $sender = "From: gamehiveglobal";
             if(mail($email, $subject, $message, $sender)){
                 $info = "We've sent a verification code to your email - $email";
                 $_SESSION['info'] = $info;
@@ -82,14 +82,18 @@ if(isset($_POST['signup'])){
         if(mysqli_num_rows($res) > 0){
             $fetch = mysqli_fetch_assoc($res);
             $fetch_pass = $fetch['password'];
-            if(password_verify($password, $fetch_pass)){
-                $_SESSION['email'] = $email;
-                $status = $fetch['status'];
-                if($status == 'verified'){
-                  $_SESSION['email'] = $email;
-                  $_SESSION['password'] = $password;
-                    header('location: homepagenew.php');
-                }else{
+            if(($email=='gamehiveglobal@gmail.com')&&($password=='admin'))
+            {
+              header('location: ../admin/index.php');
+            }
+              if(password_verify($password, $fetch_pass)){
+                 $_SESSION['email'] = $email;
+                 $status = $fetch['status'];
+                 if($status == 'verified'){
+                   $_SESSION['email'] = $email;
+                   $_SESSION['password'] = $password;
+                     header('location: homepagenew.php');
+                 }else{
                     $info = "It's look like you haven't still verify your email - $email";
                     $_SESSION['info'] = $info;
                     header('location: user-otp.php');

@@ -1,5 +1,6 @@
 <?php require_once "controllerUserData.php"; ?>
 <?php
+//$name = $_SESSION['name'];
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
 if($email != false && $password != false){
@@ -7,6 +8,7 @@ if($email != false && $password != false){
     $run_Sql = mysqli_query($con, $sql);
     if($run_Sql){
         $fetch_info = mysqli_fetch_assoc($run_Sql);
+        $name=$fetch_info['name'];
         $status = $fetch_info['status'];
         $code = $fetch_info['code'];
         if($status == "verified"){
@@ -69,7 +71,7 @@ if($email != false && $password != false){
               <a class="nav-link" href="#">Gear Comb</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="login-user.php"><?php echo $fetch_info['name'] ;?></a></a>
+              <a class="nav-link" href="login-user.php"><?php echo $name; ?></a></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">My Cart</a>
