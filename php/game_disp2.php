@@ -3,7 +3,7 @@ include "controllerUserData.php";
 include "config.php";
 ?>
 <html>
-<head><title>gear page</title>
+<head><title>Game Store</title>
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -15,10 +15,10 @@ include "config.php";
 <body>
   <?php
   include "config.php";
-  //$sql = "SELECT * FROM gearstore";
+  //$sql = "SELECT * FROM gamestore";
   //$result = $pdo->query($sql);
   ?>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="homepagenew.php"><img src="../images/bee-logo-linear-vector-icon_126523-265.jpg" alt="Logo" style="width:40px;"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -58,10 +58,10 @@ include "config.php";
     <br>
     <div class="body">
         <div class="header">
-            <div><h3>GEAR STORE</h3></div>
+            <div><h3>GAME STORE</h3></div>
         </div>
         <div class="section1">
-          <div><!--button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Filters</button--><button type="button" class="btn btn-danger"><a href="gear_display.php">clear filters</a>
+          <div><!--button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Filters</button--><button type="button" class="btn btn-danger"><a href="game_display.php">clear filters</a>
 </button></div>
             <div class="drop">
             <form action="" method="post">
@@ -153,31 +153,31 @@ include "config.php";
               if(isset($_POST['minprice'])&&isset($_POST['maxprice'])&&isset($_POST['category'])&&isset($_POST['out_of_stock']))
               {
                 //$out = $_POST['out_of_stock'];
-                $sql = "SELECT * FROM gearstore WHERE price BETWEEN :low AND :high AND gearcat = :cat AND no_of_stock = :out";
+                $sql = "SELECT * FROM gamestore WHERE price BETWEEN :low AND :high AND gamecat = :cat AND no_of_stock = :out";
                 $result = $pdo->prepare($sql);
                 $result->execute(array(':low'=>$low, ':high'=>$high, ':cat'=>$_POST['category'], ':out'=>$_POST['out_of_stock']));
               }
               if(isset($_POST['minprice'])&&isset($_POST['maxprice'])&&isset($_POST['category']))//&&$_POST['out_of_stock']==NULL//)
               {
-                $sql = "SELECT * FROM gearstore WHERE price BETWEEN :low AND :high AND gearcat = :cat";
+                $sql = "SELECT * FROM gamestore WHERE price BETWEEN :low AND :high AND gamecat = :cat";
                 $result = $pdo->prepare($sql);
                 $result->execute(array(':low'=>$low, ':high'=>$high, ':cat'=>$_POST['category']));
               }
               if(isset($_POST['minprice'])&&isset($_POST['maxprice'])&&/*isset($_POST['category'])&&*/isset($_POST['out_of_stock']))
               {
-                $sql = "SELECT * FROM gearstore WHERE price BETWEEN :low AND :high AND no_of_stock = :out";
+                $sql = "SELECT * FROM gamestore WHERE price BETWEEN :low AND :high AND no_of_stock = :out";
                 $result = $pdo->prepare($sql);
                 $result->execute(array(':low'=>$low, ':high'=>$high, ':out'=>$_POST['out_of_stock']));
               }
               if(/*isset($_POST['minprice'])&&*/isset($_POST['maxprice'])&&isset($_POST['category'])&&isset($_POST['out_of_stock']))
               {
-                $sql = "SELECT * FROM gearstore WHERE price<=:high AND gearcat = :cat AND no_of_stock = :out";
+                $sql = "SELECT * FROM gamestore WHERE price<=:high AND gamecat = :cat AND no_of_stock = :out";
                 $result = $pdo->prepare($sql);
                 $result->execute(array(':high'=>$high, ':out'=>$_POST['out_of_stock'], ':cat'=> $_POST['category']));
               }
               if(isset($_POST['minprice'])&&/*isset($_POST['maxprice'])&&*/isset($_POST['category'])&&isset($_POST['out_of_stock']))
                 {
-                  $sql = "SELECT * FROM gearstore WHERE price>=:low AND gearcat = :cat AND no_of_stock = :out";
+                  $sql = "SELECT * FROM gamestore WHERE price>=:low AND gamecat = :cat AND no_of_stock = :out";
                   $result = $pdo->prepare($sql);
                   $result->execute(array(':low'=>$low, ':out'=>$_POST['out_of_stock'], ':cat'=> $_POST['category']));
                 }
@@ -186,7 +186,7 @@ include "config.php";
         
         else
         {
-          //$sql = "SELECT * FROM gearstore";
+          //$sql = "SELECT * FROM gamestore";
           //pdo_connect();
           //$result = $pdo->query($sql);
         }
@@ -205,7 +205,7 @@ include "config.php";
             //require_once "config.php";
             /*if(isset($_POST['minprice'])&&isset($_POST['maxprice'])&&isset($_POST['category'])&&isset($_POST['out_of_stock']))
             {
-              $sql = "SELECT * FROM gearstore WHERE price BETWEEN :low AND :high AND gearcat = :cat AND no_of_stock = :out";
+              $sql = "SELECT * FROM gamestore WHERE price BETWEEN :low AND :high AND gamecat = :cat AND no_of_stock = :out";
               if($result = $pdo->prepare($sql))
               {
                 $result->bindParam(":low",$low);
@@ -220,13 +220,13 @@ include "config.php";
             {
               $name = $row['name'];
               $price = $row['price'];
-              $image = $row['gearimage'];
-              $category = $row['gearcat'];
+              $image = $row['gameimage'];
+              $category = $row['gamecat'];
           
             ?>
               <div class="each-product">
                 <div class="image"><img src="..\images\<?php echo $image;?>" alt="" style="width:100%"></div>
-                <div class="name"><a href="gear_page.php?id=<?php echo $row['id'];?>"><?php echo $name;?></a></div>
+                <div class="name"><a href="game_page.php?id=<?php echo $row['id'];?>"><?php echo $name;?></a></div>
                 <div class="details"><?php echo $price;?></div>
               </div>
               <?php

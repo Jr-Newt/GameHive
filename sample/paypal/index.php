@@ -1,6 +1,6 @@
 <?php 
 // Include configuration file 
-include_once 'config.php'; 
+include_once 'cart_config.php'; 
  
 // Include database connection file 
 include_once 'dbConnect.php'; 
@@ -35,11 +35,31 @@ include_once 'dbConnect.php';
                     <!-- Specify URLs -->
                     <input type="hidden" name="return" value="<?php echo PAYPAL_RETURN_URL; ?>">
                     <input type="hidden" name="cancel_return" value="<?php echo PAYPAL_CANCEL_URL; ?>">
-                    <input type="hidden" name="notify_url" value="https://www.codexworld.com/paypal_ipn.php">S
+                    <input type="hidden" name="notify_url" value="<?php echo PAYPAL_NOTIFY_URL; ?>">
+                    <!--input type="hidden" name="notify_url" value="https://www.codexworld.com/paypal_ipn.php"-->
 					
                     <!-- Display the payment button. -->
                     <input type="image" name="submit" border="0" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif">
                 </form>
+                <?php
+            unset($_SESSION['cart']);
+            include "config.php";
+            $sql = "INSERT INTO sales (user_id, price) VALUES (:user_id, :product_id)";
+            if($stmt = $pdo->prepare($sql)){
+              // Bind variables to the prepared statement as parameters
+              $stmt->bindParam(":user_id", $user_id);
+              $stmt->bindParam(":product_id", $sub);
+              //$stmt->bindParam(":qty", $qty);
+      
+              // Set parameters
+              $user_id = $_SESSION['user_id'];
+              $sub= $subtotal;
+              $stmt->execute();
+            }
+              ?>
+   <?php
+    }
+    ?>
             </div>
         </div>
     <?php } ?>
