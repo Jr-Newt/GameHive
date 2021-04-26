@@ -1,9 +1,10 @@
-<?php require_once "controllerUserData.php"; ?>
+<?php require_once "controllerUserData.php";
+?>
 <?php
-//$name = $_SESSION['name'];
+$name = $_SESSION['name'];
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
-if($email != false && $password != false){
+/*if($email != false && $password != false){
     $sql = "SELECT * FROM usertable WHERE email = '$email'";
     $run_Sql = mysqli_query($con, $sql);
     if($run_Sql){
@@ -21,7 +22,7 @@ if($email != false && $password != false){
     }
 }else{
     header('Location: login-user.php');
-}
+}*/
 ?>
 
 <html>
@@ -34,7 +35,7 @@ if($email != false && $password != false){
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../css/style.css">
   <style>
     body{
       background-color: rgb(255, 197, 5);
@@ -48,6 +49,45 @@ if($email != false && $password != false){
       color: rgb(240, 194, 44);
       padding-top: 30px;
       background-color: black;
+    }
+    .about{
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr;
+      background-color: rgb(255, 197, 5);
+      /*border-bottom:1px solid black ;*/
+
+    }
+    .desc-store-img{
+      display: grid;
+      background-color: rgb(255, 197, 5);
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: .25fr;
+      padding-top: 20px;
+      text-align: center;
+      height: 300px;
+      /*border-bottom :1px solid black ;*/
+    }
+    .desc-store-img div>img{
+      width: 100%;
+    }
+    .desc-store-img div>h3>a{
+      color: black;
+    }
+    .desc-store-img div>h3>a:hover{
+      color: red;
+      text-decoration: none;
+    }
+    .desc-store-p{
+      display: grid;
+      background-color: rgb(255, 197, 5);
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: .25fr;
+      padding-top: 20px;
+      text-align:left;
+      height: 300px;
+      grid-column-gap: 1em;
+      /*border-bottom :1px solid black ;*/
     }
 
 
@@ -65,24 +105,31 @@ if($email != false && $password != false){
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#">Game Comb<span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="game_diplay.php">Game Comb<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Gear Comb</a>
+              <a class="nav-link" href="gear_display.php">Gear Comb</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="login-user.php"><?php echo $name; ?></a></a>
+              <a class="nav-link" href="user_profile.php"><?php echo $name; ?></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">My Cart</a>
+              <a class="nav-link" href="cartfinal.php">My Cart</a>
             </li>
-            <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
-            </form>
-            <li class="nav-item">
+          
+            </ul>
+            <!--div class="flex-row-reverse"--><ul class="navbar-nav">
+            <li class="nav-item flex-row-reverse">
               <a class="nav-link" href="logout-user.php">Logout<span class="sr-only">(current)</span></a>
             </li>
+            </ul>
+            
+            
+            <!--form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
+            </form-->
+
 
             </div>
             </nav>
@@ -148,5 +195,5 @@ if($email != false && $password != false){
               }
             }
             </script>
-
+</body>
     </html>

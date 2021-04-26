@@ -1,0 +1,33 @@
+.cart{
+	margin-top: 65px;
+}
+.cart>h3{
+	text-align: center;
+}
+.section2{
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr 1fr;
+	grid-gap: 2em;
+}
+/*.subtotal{
+	display:grid;
+	grid-template-rows: 1fr;
+	
+	justify-content: end;
+}*/
+.buttons{
+	display:grid;
+	grid-template-rows: 1fr;
+	grid-template-columns: 1fr 1fr;
+	grid-column-gap: 1em;
+}
+.buttons>input{
+	width: fit-content;
+}
+.btn1, .btn1{
+	display: grid;
+}
+.btn{
+	justify-self: end;
+}

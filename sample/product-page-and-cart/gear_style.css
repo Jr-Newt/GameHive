@@ -1,0 +1,34 @@
+.body
+{
+    background-color: aquamarine;
+    margin-top: 45px;
+}
+.header
+{
+    text-align: center;
+}
+.main-content
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+}
+.prod_image
+{
+   display: grid;
+
+}
+.prod_image>img{
+    width: 50%;
+    justify-self: center;
+}
+.prod_desc
+{
+    display: grid; 
+    grid-template-rows: 1fr .5fr;
+}
+.section2{
+    display: grid;
+    grid-template-columns: 1fr;
+
+}

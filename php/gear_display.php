@@ -11,7 +11,7 @@
 <body>
   <?php
   include "config.php";
-  $sql = "SELECT * FROM product";
+  $sql = "SELECT * FROM gearstore";
   $result = $pdo->query($sql);
   ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -45,7 +45,7 @@
         </div>
         <div class="section1">
           <div><!--button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Filters</button--><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
+  Filters
 </button></div>
             <div class="drop">
               <select id="category"   class="form-control">
@@ -120,7 +120,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <!--button type="button" class="btn btn-primary">Save changes</button-->
       </div>
     </div>
   </div>
@@ -142,7 +142,7 @@ $result = $pdo->query($sql);
             
               <div class="each-product">
                 <div class="image"><img src="..\..\images\<?php echo $image;?>" alt="" style="width:100%"></div>
-                <div class="name"><a href="..\product-page-and-cart\gear_page.php?id=<?php echo $row['id'];?>"><?php echo $name;?></a></div>
+                <div class="name"><a href="gear_page.php?id=<?php echo $row['id'];?>"><?php echo $name;?></a></div>
                 <div class="details"><?php echo $price;?></div>
               </div>
             

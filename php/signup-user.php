@@ -52,11 +52,11 @@
                         <input class="form-control" type="password" name="cpassword" placeholder="Confirm password" required>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="phonenumber" name="phonenumber" placeholder="Phone Number" required>
+                        <input class="form-control" type="phonenumber" name="phone_no" placeholder="Phone Number" required>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="Address" name="Adress" placeholder="Enter Your Delivery Address" required>
-                        <textarea class="form-control"></textarea>
+                        <!--input class="form-control" type="Address" name="Adress" placeholder="Enter Your Delivery Address" required-->
+                        <textarea class="form-control" type="Address" name="address" placeholder="Enter Your Delivery Address" required></textarea>
                     </div>
                     <div class="form-group">
                         <input class="form-control button" type="submit" name="signup" value="Signup">

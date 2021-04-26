@@ -64,7 +64,7 @@
                                         echo "<td>";
                                             echo '<a href="gearread.php?id='. $row['id'] .'" class="mr-0" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
                                             echo '<a href="gearupdate.php?id='. $row['id'] .'" class="mr-0" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                                            echo '<a href="delete.php?id='. $row['id'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
+                                            echo '<a href="geardelete.php?id='. $row['id'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
                                         echo "</td>";
                                     echo "</tr>";
                                 }

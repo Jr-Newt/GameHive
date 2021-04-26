@@ -1,0 +1,51 @@
+
+.body
+{
+    background-color: rgb(224, 224, 255);
+    display: grid;
+    
+}
+.header
+{
+    text-align: center;
+    margin-top: 50px;
+    
+}
+.main-content
+{
+    display: grid;
+    align-self: center;
+    margin-top: 100px;
+    margin-bottom: 10px;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 1em;
+    border: 1px solid black;
+    padding: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+
+}
+.prod_image
+{
+   display: grid;
+
+}
+.prod_image>img{
+    width: 50%;
+    justify-self: center;
+}
+.prod_desc
+{
+    display: grid; 
+    grid-template-rows: 1fr .5fr;
+}
+.section2{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
+
+}
+.section2>button{
+    width: 25%;
+    justify-self: center;
+}

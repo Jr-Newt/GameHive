@@ -7,13 +7,38 @@ $errors = array();
 
 //if user signup button
 if(isset($_POST['signup'])){
+    error_reporting( error_reporting() & ~E_NOTICE );
     $name = mysqli_real_escape_string($con, $_POST['name']);
     $email = mysqli_real_escape_string($con, $_POST['email']);
     $password = mysqli_real_escape_string($con, $_POST['password']);
     $cpassword = mysqli_real_escape_string($con, $_POST['cpassword']);
+    $phone = mysqli_real_escape_string($con, $_POST['phone_no']);
+    $add = mysqli_real_escape_string($con, $_POST['address']);
+    $input_name = trim($name);
+    if(empty($input_name))
+    {
+        $errors['name'] = "Please enter a name.";
+    } elseif(!filter_var($input_name, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
+        $errors['name'] = "Please enter a valid name.";
+    }
     if($password !== $cpassword){
         $errors['password'] = "Confirm password not matched!";
     }
+    //$input_phone = trim($phone);
+    /*if(empty($input_phone)){
+        $errors['phone'] = "Please enter the phone no.";
+    }*/ 
+    if(strlen($phone)<10){
+        $errors['phone_no'] = "enter 10 didgit phone no";
+    }
+    elseif(!ctype_digit($phone)){
+        $errors['phone_no'] = "Please enter a valid phone no.";
+    }
+    
+    if(strpos($email,"@gmail.com")==false){
+        $errors['email'] = "please enter a valid email address";
+    }
+
     $email_check = "SELECT * FROM userlogin WHERE email = '$email'";
     $res = mysqli_query($con, $email_check);
     if(mysqli_num_rows($res) > 0){
@@ -23,8 +48,8 @@ if(isset($_POST['signup'])){
         $encpass = password_hash($password, PASSWORD_BCRYPT);
         $code = rand(999999, 111111);
         $status = "notverified";
-        $insert_data = "INSERT INTO userlogin (name, email, password, code, status)
-                        values('$name', '$email', '$encpass', '$code', '$status')";
+        $insert_data = "INSERT INTO userlogin (name, email, password, code, status, address, phone_no)
+                        values('$name', '$email', '$encpass', '$code', '$status', '$add', '$phone')";
         $data_check = mysqli_query($con, $insert_data);
         if($data_check){
             $subject = "Email Verification Code";
@@ -81,6 +106,8 @@ if(isset($_POST['signup'])){
         $res = mysqli_query($con, $check_email);
         if(mysqli_num_rows($res) > 0){
             $fetch = mysqli_fetch_assoc($res);
+            $name = $fetch['name'];
+            $user_id = $fetch['id'];
             $fetch_pass = $fetch['password'];
             if(($email=='gamehiveglobal@gmail.com')&&($password=='admin'))
             {
@@ -90,11 +117,13 @@ if(isset($_POST['signup'])){
                  $_SESSION['email'] = $email;
                  $status = $fetch['status'];
                  if($status == 'verified'){
+                     $_SESSION['user_id'] = $user_id;
+                    $_SESSION['name'] = $name; 
                    $_SESSION['email'] = $email;
                    $_SESSION['password'] = $password;
                      header('location: homepagenew.php');
                  }else{
-                    $info = "It's look like you haven't still verify your email - $email";
+                    $info = "It's look like you haven't still verified your email - $email";
                     $_SESSION['info'] = $info;
                     header('location: user-otp.php');
                 }

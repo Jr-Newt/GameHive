@@ -11,7 +11,7 @@
 <body>
   <?php
   include "config.php";
-  //$sql = "SELECT * FROM product";
+  //$sql = "SELECT * FROM gearstore";
   //$result = $pdo->query($sql);
   ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -136,31 +136,31 @@
               if(isset($_POST['minprice'])&&isset($_POST['maxprice'])&&isset($_POST['category'])&&isset($_POST['out_of_stock']))
               {
                 //$out = $_POST['out_of_stock'];
-                $sql = "SELECT * FROM product WHERE price BETWEEN :low AND :high AND gearcat = :cat AND no_of_stock = :out";
+                $sql = "SELECT * FROM gearstore WHERE price BETWEEN :low AND :high AND gearcat = :cat AND no_of_stock = :out";
                 $result = $pdo->prepare($sql);
                 $result->execute(array(':low'=>$low, ':high'=>$high, ':cat'=>$_POST['category'], ':out'=>$_POST['out_of_stock']));
               }
               if(isset($_POST['minprice'])&&isset($_POST['maxprice'])&&isset($_POST['category']))//&&$_POST['out_of_stock']==NULL//)
               {
-                $sql = "SELECT * FROM product WHERE price BETWEEN :low AND :high AND gearcat = :cat";
+                $sql = "SELECT * FROM gearstore WHERE price BETWEEN :low AND :high AND gearcat = :cat";
                 $result = $pdo->prepare($sql);
                 $result->execute(array(':low'=>$low, ':high'=>$high, ':cat'=>$_POST['category']));
               }
               if(isset($_POST['minprice'])&&isset($_POST['maxprice'])&&/*isset($_POST['category'])&&*/isset($_POST['out_of_stock']))
               {
-                $sql = "SELECT * FROM product WHERE price BETWEEN :low AND :high AND no_of_stock = :out";
+                $sql = "SELECT * FROM gearstore WHERE price BETWEEN :low AND :high AND no_of_stock = :out";
                 $result = $pdo->prepare($sql);
                 $result->execute(array(':low'=>$low, ':high'=>$high, ':out'=>$_POST['out_of_stock']));
               }
               if(/*isset($_POST['minprice'])&&*/isset($_POST['maxprice'])&&isset($_POST['category'])&&isset($_POST['out_of_stock']))
               {
-                $sql = "SELECT * FROM product WHERE price<=:high AND gearcat = :cat AND no_of_stock = :out";
+                $sql = "SELECT * FROM gearstore WHERE price<=:high AND gearcat = :cat AND no_of_stock = :out";
                 $result = $pdo->prepare($sql);
                 $result->execute(array(':high'=>$high, ':out'=>$_POST['out_of_stock'], ':cat'=> $_POST['category']));
               }
               if(isset($_POST['minprice'])&&/*isset($_POST['maxprice'])&&*/isset($_POST['category'])&&isset($_POST['out_of_stock']))
                 {
-                  $sql = "SELECT * FROM product WHERE price>=:low AND gearcat = :cat AND no_of_stock = :out";
+                  $sql = "SELECT * FROM gearstore WHERE price>=:low AND gearcat = :cat AND no_of_stock = :out";
                   $result = $pdo->prepare($sql);
                   $result->execute(array(':low'=>$low, ':out'=>$_POST['out_of_stock'], ':cat'=> $_POST['category']));
                 }
@@ -169,7 +169,7 @@
         
         else
         {
-          //$sql = "SELECT * FROM product";
+          //$sql = "SELECT * FROM gearstore";
           //pdo_connect();
           //$result = $pdo->query($sql);
         }
@@ -183,12 +183,12 @@
         ?>
 
         <div class="main-content">
-          <div class = "product-layout">
+          <div class =  "product-layout">
             <?php
             //require_once "config.php";
             /*if(isset($_POST['minprice'])&&isset($_POST['maxprice'])&&isset($_POST['category'])&&isset($_POST['out_of_stock']))
             {
-              $sql = "SELECT * FROM product WHERE price BETWEEN :low AND :high AND gearcat = :cat AND no_of_stock = :out";
+              $sql = "SELECT * FROM gearstore WHERE price BETWEEN :low AND :high AND gearcat = :cat AND no_of_stock = :out";
               if($result = $pdo->prepare($sql))
               {
                 $result->bindParam(":low",$low);
@@ -208,8 +208,8 @@
           
             ?>
               <div class="each-product">
-                <div class="image"><img src="..\..\images\<?php echo $image;?>" alt="" style="width:100%"></div>
-                <div class="name"><a href="..\product-page-and-cart\gear_page.php?id=<?php echo $row['id'];?>"><?php echo $name;?></a></div>
+                <div class="image"><img src="\..\images\<?php echo $image;?>" alt="" style="width:100%"></div>
+                <div class="name"><a href="gear_page.php?id=<?php echo $row['id'];?>"><?php echo $name;?></a></div>
                 <div class="details"><?php echo $price;?></div>
               </div>
               <?php
