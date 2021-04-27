@@ -1,7 +1,7 @@
 <?php 
-error_reporting( error_reporting() & ~E_NOTICE );
+//error_reporting( error_reporting() & ~E_NOTICE );
 require_once "controllerUserData.php";
-include "config.php";
+//include "config.php";
 include "connection.php";
 ?>
 <!--?php
@@ -174,8 +174,8 @@ if(empty($_SESSION["shopping_cart"])) {
         </form>
     </div>
     </div>
-            <div class="message_box">
-              <?php echo $msg;?>
-            </div>
+            <!--div class="message_box">
+              <!-?php echo $msg;?>
+            </div-->
 </body>
 </html>

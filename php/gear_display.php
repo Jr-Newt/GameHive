@@ -2,6 +2,7 @@
 <?php
  include "controllerUserData.php";
  include "config.php";
+error_reporting( error_reporting() & ~E_NOTICE );
 ?><html>
 <head><title>gear page</title>
 <meta charset="utf-8">

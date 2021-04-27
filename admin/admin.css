@@ -1,4 +1,7 @@
 
+h1{
+    text-align: center;
+}
 .reports-section{
 display: grid;
 grid-template-columns: 1fr 1fr 1fr;
