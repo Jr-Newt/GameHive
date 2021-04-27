@@ -1,3 +1,4 @@
+
 <?php
 error_reporting( error_reporting() & ~E_NOTICE );
 include "controllerUserData.php";
@@ -195,8 +196,8 @@ if ($products_in_cart) {
         <div class="buttons">
             <div class="btn1"><input type="submit" value="Update" name="update" class="btn btn-success"></div>
             <div class="btn2"><input type="submit" value="Place Order" name="placeorder" class="btn btn-primary"></div>
-            
-            
+
+
         </div>
         </div>
     </form>

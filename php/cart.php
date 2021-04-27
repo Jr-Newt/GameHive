@@ -1,4 +1,5 @@
 <?php
+error_reporting( error_reporting() & ~E_NOTICE );
 include "controllerUserData.php";
 include "config.php";
 include "connection.php";
@@ -56,6 +57,6 @@ if($stmt = $pdo->prepare($sql))
 
 </head>
 <body>
-	
+
 </body>
 </html>

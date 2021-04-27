@@ -1,4 +1,5 @@
 <?php require_once "controllerUserData.php"; ?>
+error_reporting( error_reporting() & ~E_NOTICE );
 <!DOCTYPE html>
 <html lang="en">
 <head>
