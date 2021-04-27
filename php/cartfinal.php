@@ -1,5 +1,4 @@
 <?php
-error_reporting( error_reporting() & ~E_NOTICE );
 include "controllerUserData.php";
 include "config.php";
 include "connection.php";
@@ -145,15 +144,15 @@ if ($products_in_cart) {
             <li class="nav-item">
               <a class="nav-link" href="#">My Cart</a>
             </li>
-          
+
             </ul>
             <!--div class="flex-row-reverse"--><ul class="navbar-nav">
             <li class="nav-item flex-row-reverse">
               <a class="nav-link" href="logout-user.php">Logout<span class="sr-only">(current)</span></a>
             </li>
             </ul>
-            
-            
+
+
             <!--form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
@@ -210,10 +209,16 @@ if ($products_in_cart) {
         <div class="buttons">
             <div class="btn1"><input type="submit" value="Update" name="update" class="btn btn-success"></div>
             <div class="btn2"><input type="submit" value="Place Order" name="placeorder" class="btn btn-primary"></div>
+<<<<<<< HEAD
+
+
+        </div>
+=======
             </div>
+>>>>>>> 5648e63c52471305a4fb417ee5bab799edaba31b
         </div>
     </form>
-    <?php 
+    <?php
     if(isset($_POST['placeorder']))
     {
 ?>
@@ -221,22 +226,22 @@ if ($products_in_cart) {
             <form action="<?php echo PAYPAL_URL; ?>" method="post">
                     <!-- Identify your business so that you can collect the payments. -->
                     <input type="hidden" name="business" value="<?php echo PAYPAL_ID; ?>">
-					
+
                     <!-- Specify a Buy Now button. -->
                     <input type="hidden" name="cmd" value="_xclick">
-					
+
                     <!-- Specify details about the item that buyers will purchase. -->
                     <input type="hidden" name="item_name" value="<?php echo"product1"; ?>">
                     <input type="hidden" name="item_number" value="<?php echo"id"; ?>">
                     <input type="hidden" name="amount" value="<?php echo $subtotal; ?>">
                     <input type="hidden" name="currency_code" value="<?php echo PAYPAL_CURRENCY; ?>">
-					
+
                     <!-- Specify URLs -->
                     <input type="hidden" name="return" value="<?php echo PAYPAL_RETURN_URL; ?>">
                     <input type="hidden" name="cancel_return" value="<?php echo PAYPAL_CANCEL_URL; ?>">
                     <input type="hidden" name="notify_url" value="<?php echo PAYPAL_NOTIFY_URL; ?>">
                     <!--input type="hidden" name="notify_url" value="https://www.codexworld.com/paypal_ipn.php"-->
-					
+
                     <!-- Display the payment button. -->
                     <input type="image" name="submit" border="0" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif">
                 </form>
@@ -249,7 +254,7 @@ if ($products_in_cart) {
               $stmt->bindParam(":user_id", $user_id);
               $stmt->bindParam(":product_id", $sub);
               //$stmt->bindParam(":qty", $qty);
-      
+
               // Set parameters
               $user_id = $_SESSION['user_id'];
               $sub= $subtotal;
