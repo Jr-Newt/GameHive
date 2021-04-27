@@ -1,9 +1,9 @@
-
-<?php
- include "controllerUserData.php";
- include "config.php";
-?><html>
-<head><title>gear page</title>
+<?php 
+include "controllerUserData.php";
+include "config.php";
+?>
+<html>
+<head><title>Game Store</title>
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -15,7 +15,7 @@
 <body>
   <?php
   include "config.php";
-  $sql = "SELECT * FROM gearstore";
+  $sql = "SELECT * FROM gamestore";
   $result = $pdo->query($sql);
   ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -58,7 +58,7 @@
     <br>
     <div class="body">
         <div class="header">
-            <div><h3>GEAR STORE</h3></div>
+            <div><h3>GAME STORE</h3></div>
         </div>
         <div class="section1">
           <div><!--button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Filters</button--><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -91,7 +91,7 @@
       ?-->
       </div>
       <div class="modal-body">
-      <form action="gear_disp2.php" method="post">
+      <form action="game_disp2.php" method="post">
       <div class="form-group">
         <label for="">price range</label>
         <select class="form-control" name="minprice">
@@ -121,7 +121,7 @@
                   while($row = $result->fetch(PDO::FETCH_ASSOC)) 
                   {
                   ?>
-                  <option value="<?php echo $row['gearcat'];?>"><?php echo $row['gearcat'];?></option>
+                  <option value="<?php echo $row['gamecat'];?>"><?php echo $row['gamecat'];?></option>
                   <?php
                   }
                   ?>
@@ -152,14 +152,14 @@ $result = $pdo->query($sql);
             {
               $name = $row['name'];
               $price = $row['price'];
-              $image = $row['gearimage'];
-              $category = $row['gearcat'];
+              $image = $row['gameimage'];
+              $category = $row['gamecat'];
           
             ?>
             
               <div class="each-product">
                 <div class="image"><img src="..\images\<?php echo $image;?>" alt="" style="width:100%"></div>
-                <div class="name"><a href="gear_page.php?id=<?php echo $row['id'];?>"><?php echo $name;?></a></div>
+                <div class="name"><a href="game_page.php?id=<?php echo $row['id'];?>"><?php echo $name;?></a></div>
                 <div class="details"><?php echo $price;?></div>
               </div>
             

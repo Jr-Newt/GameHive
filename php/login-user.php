@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="../css/style1.css">
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="home-page.php"><img src="../images/bee-logo-linear-vector-icon_126523-265.jpg" alt="Logo" style="width:40px;"></a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="index.php"><img src="../images/bee-logo-linear-vector-icon_126523-265.jpg" alt="Logo" style="width:40px;"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -17,41 +17,13 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Game Store</a>
+            <a class="nav-link" href="#">Game Comb<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Gear Store</a>
+            <a class="nav-link" href="#">Gear Comb</a>
           </li>
           <li class="nav-item">
-            <a href="#" onclick= "document.getElementById('id01').style.display='block'" style="width:auto;" class="nav-link">Login</a>
-            <div id="id01" class="modal">
-
-              <form class="modal-content animate" action="/action_page.php" method="post">
-                <div class="imgcontainer">
-                  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-                  <!--img src="" alt="Avatar" class="avatar"-->
-                  <h5>LOGIN</h5>
-                </div>
-
-                <div class="container2">
-                  <label for="uname"><b>Username</b></label>
-                  <input type="text" placeholder="Enter Username" name="uname" required>
-
-                  <label for="psw"><b>Password</b></label>
-                  <input type="password" placeholder="Enter Password" name="psw" required>
-
-                  <button type="submit">Login</button>
-                  <label>
-                    <input type="checkbox" checked="checked" name="remember"> Remember me
-                  </label>
-                </div>
-
-                <div class="container2" style="background-color:#f1f1f1">
-                  <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-                  <span class="psw">Forgot <a href="#">password?</a></span>
-                </div>
-              </form>
-            </div>
+            <a class="nav-link" href="login-user.php">Login</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">My Cart</a>

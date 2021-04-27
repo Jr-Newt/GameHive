@@ -1,5 +1,4 @@
 <?php
-error_reporting( error_reporting() & ~E_NOTICE );
 session_start();
 require "connection.php";
 $email = "";
@@ -28,14 +27,14 @@ if(isset($_POST['signup'])){
     //$input_phone = trim($phone);
     /*if(empty($input_phone)){
         $errors['phone'] = "Please enter the phone no.";
-    }*/
+    }*/ 
     if(strlen($phone)<10){
         $errors['phone_no'] = "enter 10 didgit phone no";
     }
     elseif(!ctype_digit($phone)){
         $errors['phone_no'] = "Please enter a valid phone no.";
     }
-
+    
     if(strpos($email,"@gmail.com")==false){
         $errors['email'] = "please enter a valid email address";
     }
@@ -120,7 +119,7 @@ if(isset($_POST['signup'])){
                  $status = $fetch['status'];
                  if($status == 'verified'){
                      $_SESSION['user_id'] = $user_id;
-                    $_SESSION['name'] = $name;
+                    $_SESSION['name'] = $name; 
                    $_SESSION['email'] = $email;
                    $_SESSION['password'] = $password;
                      header('location: homepagenew.php');

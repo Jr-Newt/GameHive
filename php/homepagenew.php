@@ -1,4 +1,6 @@
 <?php require_once "controllerUserData.php";
+include "config.php";
+error_reporting( error_reporting() & ~E_NOTICE );
 ?>
 <?php
 error_reporting( error_reporting() & ~E_NOTICE );
@@ -106,13 +108,13 @@ $password = $_SESSION['password'];
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" href="game_diplay.php">Game Comb<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="gear_display.php">Gear Comb</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="user_profile.php"><?php echo $name; ?></a>
+              <a class="nav-link" href="game_display.php">Game Comb</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><?php echo $_SESSION['name']; ?></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="cartfinal.php">My Cart</a>

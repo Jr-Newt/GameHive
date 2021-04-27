@@ -45,7 +45,7 @@
     grid-template-columns: 1fr;
 
 }
-.section2>button{
+.section2>input{
     width: 25%;
     justify-self: center;
 }
