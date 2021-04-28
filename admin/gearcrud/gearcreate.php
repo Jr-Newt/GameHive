@@ -1,6 +1,7 @@
 <?php
 // Include config file
 require_once "config.php";
+error_reporting( error_reporting() & ~E_NOTICE );
 
 // Define variables and initialize with empty values
 $name = $description = $price = $gearcat = $gearimage = $stock = "";

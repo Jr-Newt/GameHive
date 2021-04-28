@@ -1,5 +1,6 @@
 <?php
 // Include config file
+error_reporting( error_reporting() & ~E_NOTICE );
 require_once "config.php";
 
 // Define variables and initialize with empty values

@@ -1,5 +1,6 @@
 <?php
 // Process delete operation after confirmation
+error_reporting( error_reporting() & ~E_NOTICE );
 if(isset($_POST["id"]) && !empty($_POST["id"])){
     // Include config file
     require_once "config.php";
