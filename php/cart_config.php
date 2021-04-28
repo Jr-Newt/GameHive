@@ -11,7 +11,7 @@ define('PAYPAL_RETURN_URL', 'http://localhost/GAME_HIVE/Gamehive/php/success.php
 define('PAYPAL_CANCEL_URL', 'http://localhost/GAME_HIVE/Gamehive/php/cancel.php'); 
 define('PAYPAL_NOTIFY_URL', 'http://localhost/GAME_HIVE/Gamehive/php/ipn.php'); 
 define('PAYPAL_CURRENCY', 'USD'); 
- 
+//hello world 
 // Database configuration 
 define('DB_HOST', 'localhost'); 
 define('DB_USERNAME', 'root'); 
