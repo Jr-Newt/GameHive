@@ -1,4 +1,5 @@
-<?php 
+<?php
+error_reporting( error_reporting() & ~E_NOTICE );
 include "controllerUserData.php";
 include "config.php";
 ?>
@@ -39,15 +40,15 @@ include "config.php";
             <li class="nav-item">
               <a class="nav-link" href="cartfinal.php">My Cart</a>
             </li>
-          
+
             </ul>
             <!--div class="flex-row-reverse"--><ul class="navbar-nav">
             <li class="nav-item flex-row-reverse">
               <a class="nav-link" href="logout-user.php">Logout<span class="sr-only">(current)</span></a>
             </li>
             </ul>
-            
-            
+
+
             <!--form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>

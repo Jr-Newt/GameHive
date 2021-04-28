@@ -1,4 +1,5 @@
 <?php
+error_reporting( error_reporting() & ~E_NOTICE );
 include "controllerUserData.php";
 include "config.php";
 include "connection.php";
@@ -125,7 +126,7 @@ if ($products_in_cart) {
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="homepagenew.php"><img src="../images/bee-logo-linear-vector-icon_126523-265.jpg" alt="Logo" style="width:40px;"></a>
+        <a class="navbar-brand" href="homepagenew.php"><img src="C:/xampp/htdocs/gamehive/images/bee-logo-linear-vector-icon_126523-265.jpg" alt="Logo" style="width:40px;"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -183,7 +184,7 @@ if ($products_in_cart) {
                 <tr>
                     <td class="img">
                         <a href="gear_page.php?id=<?php echo $product['id'];?>">
-                            <img src="imgs/<?=$product['img']?>" width="50" height="50" alt="<?=$product['name']?>">
+                            <img src="..\images\<?php echo $product['gearimage']?>" width="50" height="50" alt="<?=$product['name']?>">
                         </a>
                     </td>
                     <td>
@@ -209,13 +210,13 @@ if ($products_in_cart) {
         <div class="buttons">
             <div class="btn1"><input type="submit" value="Update" name="update" class="btn btn-success"></div>
             <div class="btn2"><input type="submit" value="Place Order" name="placeorder" class="btn btn-primary"></div>
-<<<<<<< HEAD
+
 
 
         </div>
-=======
+
             </div>
->>>>>>> 5648e63c52471305a4fb417ee5bab799edaba31b
+
         </div>
     </form>
     <?php

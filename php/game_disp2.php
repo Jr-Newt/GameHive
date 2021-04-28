@@ -1,4 +1,5 @@
-<?php 
+<?php
+error_reporting( error_reporting() & ~E_NOTICE );
 include "controllerUserData.php";
 include "config.php";
 ?>
@@ -38,15 +39,15 @@ include "config.php";
             <li class="nav-item">
               <a class="nav-link" href="cartfinal.php">My Cart</a>
             </li>
-          
+
             </ul>
             <!--div class="flex-row-reverse"--><ul class="navbar-nav">
             <li class="nav-item flex-row-reverse">
               <a class="nav-link" href="logout-user.php">Logout<span class="sr-only">(current)</span></a>
             </li>
             </ul>
-            
-            
+
+
             <!--form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
@@ -84,14 +85,14 @@ include "config.php";
 </div>
 </form-->
         </div>
-                
+
         <?php
         /*if(isset($_POST['apply']))
         {
           echo $_POST['minprice'];
         }*/
-        
-        
+
+
         if(isset($_POST['apply']))
         {
           error_reporting( error_reporting() & ~E_NOTICE );
@@ -148,7 +149,7 @@ include "config.php";
               }
 
               //$cat = $_POST['category'];
-              
+
               //echo $_POST['category'];
               if(isset($_POST['minprice'])&&isset($_POST['maxprice'])&&isset($_POST['category'])&&isset($_POST['out_of_stock']))
               {
@@ -183,7 +184,7 @@ include "config.php";
                 }
 
 
-        
+
         else
         {
           //$sql = "SELECT * FROM gamestore";
@@ -194,7 +195,7 @@ include "config.php";
 
         /*function pdo_connect(Type $var = null)
         {
-          
+
         }*/
       }
         ?>
@@ -212,17 +213,17 @@ include "config.php";
                 $result->bindParam(":high",$high);
                 $result->bindParam(":cat",$cat);
                 $result->bindParam(":out",$out);
-                
+
               }
               //$result->execute(array(':low' , $low, ':high', $high, ':cat',$cat, ':out',$out));
             }*/
-            while($row = $result->fetch(PDO::FETCH_ASSOC)) 
+            while($row = $result->fetch(PDO::FETCH_ASSOC))
             {
               $name = $row['name'];
               $price = $row['price'];
               $image = $row['gameimage'];
               $category = $row['gamecat'];
-          
+
             ?>
               <div class="each-product">
                 <div class="image"><img src="..\images\<?php echo $image;?>" alt="" style="width:100%"></div>
@@ -235,6 +236,6 @@ include "config.php";
           </div>
         <div>
     </div>
-    
+
           </body>
           </html>

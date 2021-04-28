@@ -1,5 +1,5 @@
-
 <?php
+error_reporting( error_reporting() & ~E_NOTICE );
  include "controllerUserData.php";
  include "config.php";
 ?><html>
@@ -38,15 +38,15 @@
             <li class="nav-item">
               <a class="nav-link" href="cartfinal.php">My Cart</a>
             </li>
-          
+
             </ul>
             <!--div class="flex-row-reverse"--><ul class="navbar-nav">
             <li class="nav-item flex-row-reverse">
               <a class="nav-link" href="logout-user.php">Logout<span class="sr-only">(current)</span></a>
             </li>
             </ul>
-            
-            
+
+
             <!--form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
@@ -118,7 +118,7 @@
                 <?php
                   //pdo_connect();
 
-                  while($row = $result->fetch(PDO::FETCH_ASSOC)) 
+                  while($row = $result->fetch(PDO::FETCH_ASSOC))
                   {
                   ?>
                   <option value="<?php echo $row['gearcat'];?>"><?php echo $row['gearcat'];?></option>
@@ -148,28 +148,27 @@ $result = $pdo->query($sql);
 <div class="main-content">
           <div class = "product-layout">
             <?php
-            while($row = $result->fetch(PDO::FETCH_ASSOC)) 
+            while($row = $result->fetch(PDO::FETCH_ASSOC))
             {
               $name = $row['name'];
               $price = $row['price'];
               $image = $row['gearimage'];
               $category = $row['gearcat'];
-          
+
             ?>
-            
+
               <div class="each-product">
                 <div class="image"><img src="..\images\<?php echo $image;?>" alt="" style="width:100%"></div>
                 <div class="name"><a href="gear_page.php?id=<?php echo $row['id'];?>"><?php echo $name;?></a></div>
                 <div class="details"><?php echo $price;?></div>
               </div>
-            
+
               <?php
             }
             ?>
           </div>
         <div>
     </div>
-    
+
           </body>
           </html>
-                
