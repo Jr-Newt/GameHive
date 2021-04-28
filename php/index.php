@@ -81,10 +81,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Game Comb<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="login-user.php">Game Comb<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Gear Comb</a>
+            <a class="nav-link" href="login-user.php">Gear Comb</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="login-user.php">Login</a>

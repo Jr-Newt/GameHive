@@ -17,7 +17,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     } else{
         $name = $input_name;
     }
-    
+
 
     $input_mode = trim($_POST["mode"]);
     $input_mode = strtolower($input_mode);
@@ -26,7 +26,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     } elseif($input_mode =='online'||$input_mode=='offline'){
         $mode = $input_mode;
     } else{
-        
+
         $mode_err = "Please enter the valid online/offline mode of gaming";
     }
 
@@ -55,7 +55,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     } else{
         $gamecat = $input_gamecat;
     }
-    
+
 
 
     //Validate image
@@ -63,7 +63,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(!empty($filename)){
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
         $new_filename = $name.'.'.$ext;
-        move_uploaded_file($_FILES['gameimage']['tmp_name'], 'E:/XAMPP/htdocs/GAME HIVE/Gamehive/images/'.$new_filename);
+        move_uploaded_file($_FILES['gameimage']['tmp_name'], 'C:/xampp/htdocs/gamehive/images'.$new_filename);
     }
     else{
         $new_filename = '';

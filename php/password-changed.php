@@ -1,5 +1,6 @@
 <?php require_once "controllerUserData.php"; ?>
 <?php
+error_reporting( error_reporting() & ~E_NOTICE );
 if($_SESSION['info'] == false){
     header('Location: login-user.php');
 }

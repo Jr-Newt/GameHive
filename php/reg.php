@@ -1,5 +1,6 @@
 <html>
 <?php
+error_reporting( error_reporting() & ~E_NOTICE );
  use PHPMailer\PHPMailer\PHPMailer;
  use PHPMailer\PHPMailer\Exception;
 
