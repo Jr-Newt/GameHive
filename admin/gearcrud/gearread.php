@@ -1,5 +1,6 @@
 <?php
 // Check existence of id parameter before processing further
+error_reporting( error_reporting() & ~E_NOTICE );
 if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
     // Include config file
     require_once "config.php";
