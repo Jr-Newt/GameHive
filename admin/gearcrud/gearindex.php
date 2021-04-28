@@ -1,3 +1,9 @@
+<?php
+include "../controllerUserData.php";
+include "../config.php";
+include "../config2.php";
+include "../connection.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,20 +30,62 @@
     </script>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="../index.php"><img src="" alt="LOGO" style="width:30px;"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="../index.php">Dashboard<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Sales</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Users</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><?php echo $_SESSION['admin'];?></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded = "false">
+          Products
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="../gearcrud/gearindex.php">Gear Store</a>
+          <a class="dropdown-item" href="../gamecrud/gameindex.php">Game Store</a>
+          <div class="dropdown-divider"></div>
+          <!--a class="dropdown-item" href="#">Something else here</a-->
+        </div>
+      </li>
+      <!--li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </li-->
+    </ul>
+    <ul class="navbar-nav">
+            <li class="nav-item flex-row-reverse">
+              <a class="nav-link" href="../../php/logout-user.php">Logout<span class="sr-only">(current)</span></a>
+            </li>
+            </ul>
+  </div>
+</nav>
     <div class="wrapper">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <div class="mt-5 mb-3 clearfix">
-                        <h2 class="pull-left">Product Details</h2>
-                        <a href="gearcreate.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add New Product</a>
+                        <h2 class="pull-left">Products Details</h2>
+                        <a href="gearcreate.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add New gearstore</a>
                     </div>
                     <?php
                     // Include config file
                     require_once "config.php";
 
                     // Attempt select query execution
-                    $sql = "SELECT * FROM product";
+                    $sql = "SELECT * FROM gearstore";
                     if($result = $pdo->query($sql)){
                         if($result->rowCount() > 0){
                             echo '<table class="table table-bordered table-striped">';

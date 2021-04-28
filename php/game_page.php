@@ -1,26 +1,27 @@
-<?php
+<?php 
 error_reporting( error_reporting() & ~E_NOTICE );
 require_once "controllerUserData.php";
 include "config.php";
 include "connection.php";
+include "cart_config.php";
 ?>
 <!--?php
 include('connection.php');
 $status="";
-if (isset($_POST['gearcat']) && $_POST['gearcat']!=""){
+if (isset($_POST['gamecat']) && $_POST['gamecat']!=""){
   error_reporting( error_reporting() & ~E_NOTICE );
-$gearcat = $_POST['gearcat'];
-$result1 = mysqli_query($con,"SELECT * FROM `gearstore` WHERE `gearcat`='$gearcat'");
+$gamecat = $_POST['gamecat'];
+$result1 = mysqli_query($con,"SELECT * FROM `gamestore` WHERE `gamecat`='$gamecat'");
 $row1 = mysqli_fetch_assoc($result1);
 $name1 = $row1['name'];
-$gearcat = $row1['gearcat'];
+$gamecat = $row1['gamecat'];
 $price1 = $row1['price'];
-$image1 = $row1['gearimage'];
+$image1 = $row1['gameimage'];
 
-$cartArray =
+$cartArray = 
 	array(
 	'name'=>$name1,
-	'gearcat'=>$gearcat,
+	'gamecat'=>$gamecat,
 	'price'=>$price1,
 	'quantity'=>1,
 	'image'=>$image1)
@@ -31,9 +32,9 @@ if(empty($_SESSION["shopping_cart"])) {
 	$status = "<div class='box'>Product is added to your cart!</div>";
 }else{
 	$array_keys = array_keys($_SESSION["shopping_cart"]);
-	if(in_array($gearcat,$array_keys)) {
+	if(in_array($gamecat,$array_keys)) {
 		$status = "<div class='box' style='color:red;'>
-		Product is already added to your cart!</div>";
+		Product is already added to your cart!</div>";	
 	} else {
 	$_SESSION["shopping_cart"] = array_merge($_SESSION["shopping_cart"],$cartArray);
 	$status = "<div class='box'>Product is added to your cart!</div>";
@@ -70,7 +71,7 @@ if(empty($_SESSION["shopping_cart"])) {
     ?-->
 <html>
 <head>
-<title>Gear-page</title>
+<title>Game-page</title>
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -100,15 +101,15 @@ if(empty($_SESSION["shopping_cart"])) {
             <li class="nav-item">
               <a class="nav-link" href="cartfinal.php">My Cart</a>
             </li>
-
+          
             </ul>
             <!--div class="flex-row-reverse"--><ul class="navbar-nav">
             <li class="nav-item flex-row-reverse">
               <a class="nav-link" href="logout-user.php">Logout<span class="sr-only">(current)</span></a>
             </li>
             </ul>
-
-
+            
+            
             <!--form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
@@ -123,7 +124,7 @@ if(empty($_SESSION["shopping_cart"])) {
     if(isset($_GET["id"]) && !empty(trim($_GET["id"])))
     {
       $id = trim($_GET["id"]);
-      $sql = "SELECT * FROM gearstore WHERE id = :id";
+      $sql = "SELECT * FROM gamestore WHERE id = :id";
         if($stmt = $pdo->prepare($sql))
         {
             // Bind variables to the prepared statement as parameters
@@ -146,9 +147,9 @@ if(empty($_SESSION["shopping_cart"])) {
                     $name = $row["name"];
                     $description = $row["description"];
                     $price = $row["price"];
-                    $gearcat= $row["gearcat"];
-                    $image = $row['gearimage'];
-                    $stock = $row['no_of_stock'];
+                    $gamecat= $row["gamecat"];
+                    $image = $row['gameimage'];
+                    $stock = $row['mode'];
                 }}}
 
     }
@@ -158,20 +159,66 @@ if(empty($_SESSION["shopping_cart"])) {
         <div class="header"><h3><?php echo $name;?></h3></div>
         <div class="main-content">
             <div class="prod_image">
-                <img src="../images/<?php echo $image;?>" alt="">
+                <img src="..\images\<?php echo $image;?>" alt="">
             </div>
             <div class="prod_desc">
                 <div class="desc"><p><?php echo $description;?></p></div>
                 <div class="price">Rs.<?php echo $price;?></div>
             </div>
         </div>
-        <form action="cartfinal.php" method="post">
+        <form action=" " method="post">
             <div class="section2">
-            <input type="number" name="quantity" value="1" min="1" max="<?php echo $stock;?>" placeholder="Quantity" required>
+            <!--input type="number" name="quantity" value="1" min="1" max="<//?php echo $stock;?>" placeholder="Quantity" required-->
             <input type="hidden" name="product_id" value="<?php echo $id;?>">
-            <input type="submit" value="Add To Cart" name="cart" class="btn btn-outline-warning cartbtn">
+            <input type="submit" value="Purchase" name="purchase" class="btn btn-outline-warning">
             </div>
         </form>
+        <?php
+        if(isset($_POST['purchase']))
+    {
+?>
+            <!-- PayPal payment form for displaying the buy button -->
+            <form action="<?php echo PAYPAL_URL; ?>" method="post">
+                    <!-- Identify your business so that you can collect the payments. -->
+                    <input type="hidden" name="business" value="<?php echo PAYPAL_ID; ?>">
+					
+                    <!-- Specify a Buy Now button. -->
+                    <input type="hidden" name="cmd" value="_xclick">
+					
+                    <!-- Specify details about the item that buyers will purchase. -->
+                    <input type="hidden" name="item_name" value="<?php echo"product1"; ?>">
+                    <input type="hidden" name="item_number" value="<?php echo"id"; ?>">
+                    <input type="hidden" name="amount" value="<?php echo $price; ?>">
+                    <input type="hidden" name="currency_code" value="<?php echo PAYPAL_CURRENCY; ?>">
+					
+                    <!-- Specify URLs -->
+                    <input type="hidden" name="return" value="<?php echo PAYPAL_RETURN_URL; ?>">
+                    <input type="hidden" name="cancel_return" value="<?php echo PAYPAL_CANCEL_URL; ?>">
+                    <input type="hidden" name="notify_url" value="<?php echo PAYPAL_NOTIFY_URL; ?>">
+                    <!--input type="hidden" name="notify_url" value="https://www.codexworld.com/paypal_ipn.php"-->
+					
+                    <!-- Display the payment button. -->
+                    <input type="image" name="submit" border="0" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif">
+                </form>
+                <?php
+            //unset($_SESSION['cart']);
+            include "config.php";
+            $sql = "INSERT INTO sales (user_id, price) VALUES (:user_id, :product_id)";
+            if($stmt = $pdo->prepare($sql)){
+              // Bind variables to the prepared statement as parameters
+              $stmt->bindParam(":user_id", $user_id);
+              $stmt->bindParam(":product_id", $sub);
+              //$stmt->bindParam(":qty", $qty);
+      
+              // Set parameters
+              $user_id = $_SESSION['user_id'];
+              $sub= $price;
+              $stmt->execute();
+            }
+              ?>
+   <?php
+    }
+    ?>
     </div>
     </div>
             <div class="message_box">

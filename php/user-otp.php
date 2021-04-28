@@ -1,4 +1,5 @@
-<?php require_once "controllerUserData.php"; ?>
+<?php require_once "controllerUserData.php";
+error_reporting( error_reporting() & ~E_NOTICE ); ?>
 <?php
 $email = $_SESSION['email'];
 if($email == false){

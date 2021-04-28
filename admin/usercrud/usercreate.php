@@ -3,8 +3,8 @@
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$name = $description = $price = $gamecat = $gameimage = $mode = "";
-$name_err = $description_err = $price_err = $gamecat_err = $gameimage_err = $mode_err = "";
+$name = $address = $phone_no = $email = $gameimage = $mode = "";
+$name_err = $address_err = $phone_no_err = $email_err = $gameimage_err = $mode_err = "";
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -17,45 +17,47 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     } else{
         $name = $input_name;
     }
-
+    
 
     $input_mode = trim($_POST["mode"]);
     $input_mode = strtolower($input_mode);
-    if(empty($input_mode)){
+    if(empty($input_mode))
+    {
         $mode_err = "Please enter the mode of gaming.";
-    } elseif($input_mode =='online'||$input_mode=='offline'){
+    } elseif($input_mode =='online'||$input_mode =='offline')
+    {
         $mode = $input_mode;
     } else{
-
+        
         $mode_err = "Please enter the valid online/offline mode of gaming";
     }
 
     // Validate address
-    $input_description = trim($_POST["description"]);
-    if(empty($input_description)){
-        $description_err = "Please enter Game description.";
+    $input_address = trim($_POST["address"]);
+    if(empty($input_address)){
+        $address_err = "Please enter Game address.";
     } else{
-        $description = $input_description;
+        $address = $input_address;
     }
 
     // Validate salary
-    $input_price = trim($_POST["price"]);
-    if(empty($input_price)){
-        $price_err = "Please enter the price of game.";
-    } elseif(!ctype_digit($input_price)){
-        $price_err = "Please enter a positive integer value.";
+    $input_phone_no = trim($_POST["phone_no"]);
+    if(empty($input_phone_no)){
+        $phone_no_err = "Please enter the phone_no of game.";
+    } elseif(!ctype_digit($input_phone_no)){
+        $phone_no_err = "Please enter a positive integer value.";
     } else{
-        $price = $input_price;
+        $phone_no = $input_phone_no;
     }
 
     // Validate category
-    $input_gamecat = trim($_POST["gamecat"]);
-    if(empty($input_gamecat)){
-        $gamecat_err = "Please enter game category.";
+    $input_email = trim($_POST["email"]);
+    if(empty($input_email)){
+        $email_err = "Please enter game category.";
     } else{
-        $gamecat = $input_gamecat;
+        $email = $input_email;
     }
-
+    
 
 
     //Validate image
@@ -63,31 +65,31 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(!empty($filename)){
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
         $new_filename = $name.'.'.$ext;
-        move_uploaded_file($_FILES['gameimage']['tmp_name'], 'C:/xampp/htdocs/gamehive/images'.$new_filename);
+        move_uploaded_file($_FILES['gameimage']['tmp_name'], 'E:/XAMPP/htdocs/GAME HIVE/Gamehive/images/'.$new_filename);
     }
     else{
         $new_filename = '';
     }
 
     // Check input errors before inserting in database
-    if(empty($name_err) && empty($description_err) && empty($price_err) && empty($gamecat_err)&&empty($mode_err)){
+    if(empty($name_err) && empty($address_err) && empty($phone_no_err) && empty($email_err)&&empty($mode_err)){
         // Prepare an insert statement
-        $sql = "INSERT INTO gamestore (name, description, price, gamecat, gameimage, mode) VALUES (:name, :description, :price, :gamecat, :gameimage, :mode)";
+        $sql = "INSERT INTO gamestore (name, address, phone_no, email, gameimage, mode) VALUES (:name, :address, :phone_no, :email, :gameimage, :mode)";
 
         if($stmt = $pdo->prepare($sql)){
             // Bind variables to the prepared statement as parameters
             $stmt->bindParam(":name", $param_name);
-            $stmt->bindParam(":description", $param_description);
-            $stmt->bindParam(":price", $param_price);
-            $stmt->bindParam(":gamecat", $param_gamecat);
+            $stmt->bindParam(":address", $param_address);
+            $stmt->bindParam(":phone_no", $param_phone_no);
+            $stmt->bindParam(":email", $param_email);
             $stmt->bindParam(":gameimage", $param_gameimage);
             $stmt->bindParam(":mode", $param_mode);
 
             // Set parameters
             $param_name = $name;
-            $param_description = $description;
-            $param_price = $price;
-            $param_gamecat = $gamecat;
+            $param_address = $address;
+            $param_phone_no = $phone_no;
+            $param_email = $email;
             $param_gameimage = $new_filename;
             $param_mode = $mode;
 
@@ -116,6 +118,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta charset="UTF-8">
     <title>Create Record</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="">
     <style>
         .wrapper{
             width: 600px;
@@ -124,6 +127,40 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </style>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#"><img src="" alt="LOGO" style="width:40px;"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Dashboard</a>
+      </li>
+      <!--li class="nav-item">
+        <a class="nav-link" href="#">Sales</a>
+      </li-->
+      <li class="nav-item">
+        <a class="nav-link" href="userindex.php">Users</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded = "false">
+          Products
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="gearcrud/gearindex.php">Gear Store</a>
+          <a class="dropdown-item" href="gamecrud/gameindex.php">Game Store</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </li>
+    </ul>
+  </div>
+</nav>
     <div class="wrapper">
         <div class="container-fluid">
             <div class="row">
@@ -138,19 +175,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
                         <div class="form-group">
 
-                            <label>Description</label>
-                            <textarea name="description" class="form-control <?php echo (!empty($description_err)) ? 'is-invalid' : ''; ?>"><?php echo $description; ?></textarea>
-                            <span class="invalid-feedback"><?php echo $description_err;?></span>
+                            <label>address</label>
+                            <textarea name="address" class="form-control <?php echo (!empty($address_err)) ? 'is-invalid' : ''; ?>"><?php echo $address; ?></textarea>
+                            <span class="invalid-feedback"><?php echo $address_err;?></span>
                         </div>
                         <div class="form-group">
-                            <label>Price</label>
-                            <input type="text" name="price" class="form-control <?php echo (!empty($price_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $price; ?>">
-                            <span class="invalid-feedback"><?php echo $price_err;?></span>
+                            <label>phone_no</label>
+                            <input type="text" name="phone_no" class="form-control <?php echo (!empty($phone_no_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $phone_no; ?>">
+                            <span class="invalid-feedback"><?php echo $phone_no_err;?></span>
                         </div>
                         <div class="form-group">
                             <label>Category</label>
-                            <input type="text" name="gamecat" class="form-control <?php echo (!empty($gamecat_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $gamecat; ?>">
-                            <span class="invalid-feedback"><?php echo $gamecat;?></span>
+                            <input type="text" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>">
+                            <span class="invalid-feedback"><?php echo $email;?></span>
                         </div>
                         <tr>
                             <td>Image:<input type="file" name="gameimage" accept="image/jpeg"></td>

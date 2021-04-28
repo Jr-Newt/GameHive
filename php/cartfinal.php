@@ -1,9 +1,10 @@
-
 <?php
 error_reporting( error_reporting() & ~E_NOTICE );
 include "controllerUserData.php";
 include "config.php";
 include "connection.php";
+include "cart_config.php";
+
 
 $id = $_SESSION['user_id'];
 $query = $pdo->prepare('SELECT * FROM gearstore WHERE id = ?');
@@ -88,10 +89,10 @@ if (isset($_POST['update']) && isset($_SESSION['cart'])) {
     header('location: cartfinal.php');
     exit;
 }
-if (isset($_POST['placeorder']) && isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-    header('Location: index.php?page=placeorder');
-    exit;
-}
+//if (isset($_POST['placeorder']) && isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+    //header('Location: cartfinal.php');
+    //exit;
+//}
 // Check the session variable for products in cart
 $products_in_cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : array();
 $products = array();
@@ -125,29 +126,42 @@ if ($products_in_cart) {
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="home-page.html"><img src="bee-logo-linear-vector-icon_126523-265.jpg" alt="Logo" style="width:40px;"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <a class="navbar-brand" href="homepagenew.php"><img src="C:/xampp/htdocs/gamehive/images/bee-logo-linear-vector-icon_126523-265.jpg" alt="Logo" style="width:40px;"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Game Comb<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Gear Comb</a>
-          </li>
-<li class="nav-item">
-            <a class="nav-link" href="#">My Cart</a>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
-        </form>
-      </div>
-    </nav>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="gear_display.php">Gear Comb</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="game_display.php">Game Comb</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><?php echo $_SESSION['name']; ?></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">My Cart</a>
+            </li>
+
+            </ul>
+            <!--div class="flex-row-reverse"--><ul class="navbar-nav">
+            <li class="nav-item flex-row-reverse">
+              <a class="nav-link" href="logout-user.php">Logout<span class="sr-only">(current)</span></a>
+            </li>
+            </ul>
+
+
+            <!--form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
+            </form-->
+
+
+            </div>
+            </nav>
 <div class="cart ">
     <h3>Shopping Cart</h3>
     <form action="cartfinal.php" method="post">
@@ -170,7 +184,7 @@ if ($products_in_cart) {
                 <tr>
                     <td class="img">
                         <a href="gear_page.php?id=<?php echo $product['id'];?>">
-                            <img src="imgs/<?=$product['img']?>" width="50" height="50" alt="<?=$product['name']?>">
+                            <img src="..\images\<?php echo $product['gearimage']?>" width="50" height="50" alt="<?=$product['name']?>">
                         </a>
                     </td>
                     <td>
@@ -178,11 +192,11 @@ if ($products_in_cart) {
                         <br>
                         <a href="cartfinal.php?remove=<?=$product['id']?>" class="remove">Remove</a>
                     </td>
-                    <td class="price">Rs.<?=$product['price']?></td>
+                    <td class="price">$<?=$product['price']?></td>
                     <td class="quantity">
                         <input type="number" name="quantity-<?=$product['id']?>" value="<?=$products_in_cart[$product['id']]?>" min="1" max="<?=$product['quantity']?>" placeholder="Quantity" class="form-control" required>
                     </td>
-                    <td class="price">Rs.<?=$product['price'] * $products_in_cart[$product['id']]?></td>
+                    <td class="price">$<?=$product['price'] * $products_in_cart[$product['id']]?></td>
                 </tr>
                 <?php endforeach; ?>
                 <?php endif; ?>
@@ -191,16 +205,66 @@ if ($products_in_cart) {
         <div class="section2">
         <div class="subtotal">
             <label for="" class="from-control">subtotal:</label>
-            <span class="price">Rs.<?=$subtotal?></span>
+            <span class="price">$<?php echo $subtotal.''.PAYPAL_CURRENCY;?></span>
         </div>
         <div class="buttons">
             <div class="btn1"><input type="submit" value="Update" name="update" class="btn btn-success"></div>
             <div class="btn2"><input type="submit" value="Place Order" name="placeorder" class="btn btn-primary"></div>
 
 
+
         </div>
+
+            </div>
+
         </div>
     </form>
+    <?php
+    if(isset($_POST['placeorder']))
+    {
+?>
+            <!-- PayPal payment form for displaying the buy button -->
+            <form action="<?php echo PAYPAL_URL; ?>" method="post">
+                    <!-- Identify your business so that you can collect the payments. -->
+                    <input type="hidden" name="business" value="<?php echo PAYPAL_ID; ?>">
+
+                    <!-- Specify a Buy Now button. -->
+                    <input type="hidden" name="cmd" value="_xclick">
+
+                    <!-- Specify details about the item that buyers will purchase. -->
+                    <input type="hidden" name="item_name" value="<?php echo"product1"; ?>">
+                    <input type="hidden" name="item_number" value="<?php echo"id"; ?>">
+                    <input type="hidden" name="amount" value="<?php echo $subtotal; ?>">
+                    <input type="hidden" name="currency_code" value="<?php echo PAYPAL_CURRENCY; ?>">
+
+                    <!-- Specify URLs -->
+                    <input type="hidden" name="return" value="<?php echo PAYPAL_RETURN_URL; ?>">
+                    <input type="hidden" name="cancel_return" value="<?php echo PAYPAL_CANCEL_URL; ?>">
+                    <input type="hidden" name="notify_url" value="<?php echo PAYPAL_NOTIFY_URL; ?>">
+                    <!--input type="hidden" name="notify_url" value="https://www.codexworld.com/paypal_ipn.php"-->
+
+                    <!-- Display the payment button. -->
+                    <input type="image" name="submit" border="0" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif">
+                </form>
+            <?php
+            unset($_SESSION['cart']);
+            include "config.php";
+            $sql = "INSERT INTO sales (user_id, price) VALUES (:user_id, :product_id)";
+            if($stmt = $pdo->prepare($sql)){
+              // Bind variables to the prepared statement as parameters
+              $stmt->bindParam(":user_id", $user_id);
+              $stmt->bindParam(":product_id", $sub);
+              //$stmt->bindParam(":qty", $qty);
+
+              // Set parameters
+              $user_id = $_SESSION['user_id'];
+              $sub= $subtotal;
+              $stmt->execute();
+            }
+              ?>
+   <?php
+    }
+    ?>
 </div>
 </body>
 </html>
