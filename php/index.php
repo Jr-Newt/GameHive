@@ -35,7 +35,6 @@
       display: grid;
       background-color: rgb(255, 197, 5);
       grid-template-columns: 1fr 1fr;
-
       padding-top: 20px;
       text-align: center;
       height: 300px;
@@ -55,7 +54,6 @@
       display: grid;
       background-color: rgb(255, 197, 5);
       grid-template-columns: 1fr 1fr;
-
       padding-top: 20px;
       text-align:left;
       height: 300px;
