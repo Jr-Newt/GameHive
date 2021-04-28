@@ -2,10 +2,6 @@
 error_reporting( error_reporting() & ~E_NOTICE );
  include "controllerUserData.php";
  include "config.php";
-<<<<<<< HEAD
-=======
-error_reporting( error_reporting() & ~E_NOTICE );
->>>>>>> b62fa982297755d75748ee6e4d6d06810acf36e1
 ?><html>
 <head><title>gear page</title>
 <meta charset="utf-8">

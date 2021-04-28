@@ -1,20 +1,9 @@
 
-<<<<<<< HEAD
 .reports-section{
 display: grid;
 grid-template-columns: 1fr 1fr 1fr;
 justify-content: center;
 }
-=======
-h1{
-    text-align: center;
-}
-.reports-section{
-display: grid;
-grid-template-columns: 1fr 1fr 1fr;
-justify-content: center;
-}
->>>>>>> b62fa982297755d75748ee6e4d6d06810acf36e1
 .main-container{
     display: grid;
 }

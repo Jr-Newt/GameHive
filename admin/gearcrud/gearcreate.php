@@ -66,11 +66,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Check input errors before inserting in database
     if(empty($name_err) && empty($description_err) && empty($price_err) && empty($gearcat_err)&& empty($stock_err)){
         // Prepare an insert statement
-<<<<<<< HEAD
-        $sql = "INSERT INTO gearstore (name, description, price, gearcat, gearimage) VALUES (:name, :description, :price, :gearcat, :gearimage)";
-=======
         $sql = "INSERT INTO gearstore (name, description, price, gearcat, gearimage, no_of_stock) VALUES (:name, :description, :price, :gearcat, :gearimage, :stock)";
->>>>>>> b62fa982297755d75748ee6e4d6d06810acf36e1
 
         if($stmt = $pdo->prepare($sql)){
             // Bind variables to the prepared statement as parameters
