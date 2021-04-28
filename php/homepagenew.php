@@ -179,12 +179,12 @@ $password = $_SESSION['password'];
             </div>
             <div class="about">
             <h1>About Us</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe suscipit aut accusantium optio eum maiores libero repellat non nihil maxime laudantium alias sequi quo similique nesciunt odit, accusamus nemo. Placeat!</p>
+            <p>GAME HIVE is an e-commerce website that sells both gaming gears as well as console games. This is a dream come true moment for many hardcore gamers because life was difficult for us when it comes to gaming. It was really difficult for us to purchase gaming gears in normal websites and games are really expensive. No worries ANYMORE because a BIG hive is here in town!!!. </p>
             </div>
             <h1 style="background-color: rgb(255, 197, 5);margin: 0;">What We Offer</h1>
             <div class="desc-store-img">
-            <div><h3><a href="#">Gear Store</a></h3><img src="../images/ac.jpg" style="height: 200px;width: 60%;"alt=""></div>
-            <div><h3><a href="#">Game Store</a></h3><img src="../images/pexels-tima-miroshnichenko-5303633.jpg" alt=""style="height: 24%;width: 60%;"></div>
+            <div><h3><a href="game_display.php">Game Store</a></h3><img src="../images/ac.jpg" style="height: 200px;width: 60%;"alt=""></div>
+            <div><h3><a href="gear_display.php">Gear Store</a></h3><img src="../images/pexels-tima-miroshnichenko-5303633.jpg" alt=""style="height: 24%;width: 60%;"></div>
             </div>
             <div class="desc-store-p"><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae quisquam explicabo distinctio totam facere nemo minus optio, amet quidem libero!</p><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus sapiente sint dolorum illum magni animi ullam optio laudantium perferendis esse.</p></div>
             <script>

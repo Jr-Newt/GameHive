@@ -249,7 +249,11 @@ if ($products_in_cart) {
             <?php
             unset($_SESSION['cart']);
             include "config.php";
+<<<<<<< HEAD
             $sql = "INSERT INTO sales (user_id, price) VALUES (:user_id, :product_id)";
+=======
+            $sql = "INSERT INTO orders (user_id, price) VALUES (:user_id, :product_id)";
+>>>>>>> b62fa982297755d75748ee6e4d6d06810acf36e1
             if($stmt = $pdo->prepare($sql)){
               // Bind variables to the prepared statement as parameters
               $stmt->bindParam(":user_id", $user_id);

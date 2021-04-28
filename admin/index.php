@@ -63,7 +63,11 @@ if(!empty($_SESSION['admin']))
   {
     $users = $result->rowCount();
 }
+<<<<<<< HEAD
 $q2 = "SELECT SUM(price) FROM sales";
+=======
+$q2 = "SELECT SUM(price) FROM orders";
+>>>>>>> b62fa982297755d75748ee6e4d6d06810acf36e1
   if($result = $pdo->query($q2))
   {
     $sales = $result->rowCount();
@@ -79,7 +83,11 @@ $q4 = "SELECT * FROM gearstore";
     $products = $result->rowCount();
 }}
 ?>
+<<<<<<< HEAD
 <div class="header"><h1>Dashboard</h1></div>
+=======
+<div><h1>Dashboard</h1></div>
+>>>>>>> b62fa982297755d75748ee6e4d6d06810acf36e1
 <div class="row">
   <div class="col-sm-3">
     <div class="card">
