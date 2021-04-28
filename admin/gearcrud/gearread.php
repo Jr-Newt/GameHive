@@ -1,11 +1,12 @@
 <?php
 // Check existence of id parameter before processing further
+error_reporting( error_reporting() & ~E_NOTICE );
 if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
     // Include config file
     require_once "config.php";
 
     // Prepare a select statement
-    $sql = "SELECT * FROM product WHERE id = :id";
+    $sql = "SELECT * FROM gearstore WHERE id = :id";
 
     if($stmt = $pdo->prepare($sql)){
         // Bind variables to the prepared statement as parameters

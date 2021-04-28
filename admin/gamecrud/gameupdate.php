@@ -3,14 +3,11 @@
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$name = $description = $price = $gamecat = $gameimage = "";
-$name_err = $description_err = $price_err = $gamecat_err = $gameimage_err = "";
+$name = $description = $price = $gamecat = $gameimage = $mode = "";
+$name_err = $description_err = $price_err = $gamecat_err = $gameimage_err = $mode_err = "";
 
 // Processing form data when form is submitted
-if(isset($_POST["id"]) && !empty($_POST["id"])){
-    // Get hidden input value
-    $id = $_POST["id"];
-
+if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate name
     $input_name = trim($_POST["name"]);
     if(empty($input_name)){
@@ -21,35 +18,45 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         $name = $input_name;
     }
 
-    // Validate description
+    $input_mode = strtolower(trim($_POST["mode"]));
+    if(empty($input_mode)){
+        $mode_err = "Please enter the mode of gaming.";
+    } elseif($input_mode!='online'||$input_mode!='offline'){
+        $mode_err = "Please enter the valid online/offline mode of gaming";
+    } else{
+        $mode = $input_mode;
+    }
+
+    // Validate address
     $input_description = trim($_POST["description"]);
     if(empty($input_description)){
-        $description_err = "Please enter an address.";
+        $description_err = "Please enter Game description.";
     } else{
         $description = $input_description;
-    }
-    // Validate category
-    $input_gamecat = trim($_POST["gamecat"]);
-    if(empty($input_gamecat)){
-        $gamecat_err = "Please enter product description.";
-    } else{
-        $gamecat = $input_gamecat;
     }
 
     // Validate salary
     $input_price = trim($_POST["price"]);
     if(empty($input_price)){
-        $price_err = "Please enter the salary amount.";
+        $price_err = "Please enter the price of game.";
     } elseif(!ctype_digit($input_price)){
         $price_err = "Please enter a positive integer value.";
     } else{
         $price = $input_price;
     }
 
+    // Validate category
+    $input_gamecat = trim($_POST["gamecat"]);
+    if(empty($input_gamecat)){
+        $gamecat_err = "Please enter game category.";
+    } else{
+        $gamecat = $input_gamecat;
+    }
+
     // Check input errors before inserting in database
-    if(empty($name_err) && empty($description_err) && empty($price_err) && empty($gamecat_err)){
+    if(empty($name_err) && empty($description_err) && empty($price_err) && empty($gamecat_err)&&empty($mode_err)){
         // Prepare an update statement
-        $sql = "UPDATE gamestore SET name=:name, description=:description, gamecat=:gamecat price=:price WHERE id=:id";
+        $sql = "UPDATE gamestore SET name=:name, description=:description, gamecat=:gamecat price=:price, mode=:mode WHERE id=:id";
 
         if($stmt = $pdo->prepare($sql)){
             // Bind variables to the prepared statement as parameters
@@ -58,6 +65,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
             $stmt->bindParam(":gamecat", $param_gamecat);
             $stmt->bindParam(":price", $param_price);
             $stmt->bindParam(":id", $param_id);
+            $stmt->bindParam(":mode", $param_mode);
 
             // Set parameters
             $param_name = $name;
@@ -65,6 +73,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
             $param_gamecat = $gamecat;
             $param_price = $price;
             $param_id = $id;
+            $param_mode = $mode;
 
             // Attempt to execute the prepared statement
             if($stmt->execute()){
@@ -109,6 +118,8 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                     $description = $row["description"];
                     $price = $row["price"];
                     $gamecat= $row["gamecat"];
+                    $gameimage = $row["gameimage"];
+                $mode = $row["mode"];
                 } else{
                     // URL doesn't contain valid id. Redirect to error page
                     header("location: gameerror.php");
@@ -173,6 +184,11 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                             <label>Category</label>
                             <input type="text" name="gamecat" class="form-control <?php echo (!empty($gamecat_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $gamecat; ?>">
                             <span class="invalid-feedback"><?php echo $gamecat;?></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Mode</label>
+                            <input type="text" name="mode" class="form-control <?php echo (!empty($mode_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $mode; ?>">
+                            <span class="invalid-feedback"><?php echo $mode_err;?></span>
                         </div>
                         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
                         <input type="submit" class="btn btn-primary" value="Submit">

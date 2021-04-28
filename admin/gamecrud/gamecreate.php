@@ -1,10 +1,11 @@
 <?php
+error_reporting( error_reporting() & ~E_NOTICE );
 // Include config file
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$name = $description = $price = $gamecat = $gameimage = "";
-$name_err = $description_err = $price_err = $gamecat_err = $gameimage_err = "";
+$name = $description = $price = $gamecat = $gameimage = $mode = "";
+$name_err = $description_err = $price_err = $gamecat_err = $gameimage_err = $mode_err = "";
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -16,6 +17,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $name_err = "Please enter a valid name.";
     } else{
         $name = $input_name;
+    }
+
+
+    $input_mode = trim($_POST["mode"]);
+    $input_mode = strtolower($input_mode);
+    if(empty($input_mode)){
+        $mode_err = "Please enter the mode of gaming.";
+    } elseif($input_mode =='online'||$input_mode=='offline'){
+        $mode = $input_mode;
+    } else{
+
+        $mode_err = "Please enter the valid online/offline mode of gaming";
     }
 
     // Validate address
@@ -44,21 +57,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $gamecat = $input_gamecat;
     }
 
+
+
     //Validate image
     $filename = $_FILES['gameimage']['name'];
     if(!empty($filename)){
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
         $new_filename = $name.'.'.$ext;
-        move_uploaded_file($_FILES['gameimage']['tmp_name'], '../images/'.$new_filename);
+        move_uploaded_file($_FILES['gameimage']['tmp_name'], 'C:/xampp/htdocs/gamehive/images'.$new_filename);
     }
     else{
         $new_filename = '';
     }
 
     // Check input errors before inserting in database
-    if(empty($name_err) && empty($description_err) && empty($price_err) && empty($gamecat_err)){
+    if(empty($name_err) && empty($description_err) && empty($price_err) && empty($gamecat_err)&&empty($mode_err)){
         // Prepare an insert statement
-        $sql = "INSERT INTO gamestore (name, description, price, gamecat, gameimage) VALUES (:name, :description, :price, :gamecat, :gameimage)";
+        $sql = "INSERT INTO gamestore (name, description, price, gamecat, gameimage, mode) VALUES (:name, :description, :price, :gamecat, :gameimage, :mode)";
 
         if($stmt = $pdo->prepare($sql)){
             // Bind variables to the prepared statement as parameters
@@ -67,6 +82,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $stmt->bindParam(":price", $param_price);
             $stmt->bindParam(":gamecat", $param_gamecat);
             $stmt->bindParam(":gameimage", $param_gameimage);
+            $stmt->bindParam(":mode", $param_mode);
 
             // Set parameters
             $param_name = $name;
@@ -74,6 +90,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_price = $price;
             $param_gamecat = $gamecat;
             $param_gameimage = $new_filename;
+            $param_mode = $mode;
 
             // Attempt to execute the prepared statement
             if($stmt->execute()){
@@ -139,6 +156,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         <tr>
                             <td>Image:<input type="file" name="gameimage" accept="image/jpeg"></td>
                         </tr>
+                        <div class="form-group">
+                            <label>Mode</label>
+                            <input type="text" name="mode" class="form-control <?php echo (!empty($mode_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $mode; ?>">
+                            <span class="invalid-feedback"><?php echo $mode_err;?></span>
+                        </div>
                         <input type="submit" class="btn btn-primary" value="Submit">
                         <a href="gameindex.php" class="btn btn-secondary ml-2">Cancel</a>
                     </form>

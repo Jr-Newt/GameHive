@@ -1,9 +1,10 @@
-
+body{
+    background-color: rgb(201, 240, 252);
+}
 .body
 {
-    background-color: rgb(224, 224, 255);
     display: grid;
-    
+    background-color: rgb(201, 240, 252);
 }
 .header
 {
@@ -14,12 +15,12 @@
 .main-content
 {
     display: grid;
+    
     align-self: center;
-    margin-top: 100px;
+    margin-top: 50px;
     margin-bottom: 10px;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-gap: 1em;
-    border: 1px solid black;
     padding: 10px;
     margin-left: 5px;
     margin-right: 5px;
@@ -31,6 +32,9 @@
 
 }
 .prod_image>img{
+    margin-top: 10px;
+    box-shadow: 5px 5px 5px grey;
+    margin-bottom: 10px;
     width: 50%;
     justify-self: center;
 }
@@ -40,12 +44,13 @@
     grid-template-rows: 1fr .5fr;
 }
 .section2{
+   margin-top: 0%;
     display: grid;
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr;
 
 }
-.section2>button{
+.section2>input{
     width: 25%;
     justify-self: center;
 }

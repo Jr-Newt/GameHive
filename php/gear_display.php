@@ -1,4 +1,8 @@
-<html>
+<?php
+error_reporting( error_reporting() & ~E_NOTICE );
+ include "controllerUserData.php";
+ include "config.php";
+?><html>
 <head><title>gear page</title>
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,29 +19,42 @@
   $result = $pdo->query($sql);
   ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="home-page.html"><img src="bee-logo-linear-vector-icon_126523-265.jpg" alt="Logo" style="width:40px;"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <a class="navbar-brand" href="homepagenew.php"><img src="../images/bee-logo-linear-vector-icon_126523-265.jpg" alt="Logo" style="width:40px;"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Game Comb<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Gear Comb</a>
-          </li>
-<li class="nav-item">
-            <a class="nav-link" href="#">My Cart</a>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
-        </form>
-      </div>
-    </nav>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="gear_display.php">Gear Comb</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="game_display.php">Game Comb</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><?php echo $_SESSION['name']; ?></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cartfinal.php">My Cart</a>
+            </li>
+
+            </ul>
+            <!--div class="flex-row-reverse"--><ul class="navbar-nav">
+            <li class="nav-item flex-row-reverse">
+              <a class="nav-link" href="logout-user.php">Logout<span class="sr-only">(current)</span></a>
+            </li>
+            </ul>
+
+
+            <!--form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
+            </form-->
+
+
+            </div>
+            </nav>
     <br>
     <div class="body">
         <div class="header">
@@ -101,7 +118,7 @@
                 <?php
                   //pdo_connect();
 
-                  while($row = $result->fetch(PDO::FETCH_ASSOC)) 
+                  while($row = $result->fetch(PDO::FETCH_ASSOC))
                   {
                   ?>
                   <option value="<?php echo $row['gearcat'];?>"><?php echo $row['gearcat'];?></option>
@@ -131,28 +148,27 @@ $result = $pdo->query($sql);
 <div class="main-content">
           <div class = "product-layout">
             <?php
-            while($row = $result->fetch(PDO::FETCH_ASSOC)) 
+            while($row = $result->fetch(PDO::FETCH_ASSOC))
             {
               $name = $row['name'];
               $price = $row['price'];
               $image = $row['gearimage'];
               $category = $row['gearcat'];
-          
+
             ?>
-            
+
               <div class="each-product">
-                <div class="image"><img src="..\..\images\<?php echo $image;?>" alt="" style="width:100%"></div>
+                <div class="image"><img src="..\images\<?php echo $image;?>" alt="" style="width:100%"></div>
                 <div class="name"><a href="gear_page.php?id=<?php echo $row['id'];?>"><?php echo $name;?></a></div>
                 <div class="details"><?php echo $price;?></div>
               </div>
-            
+
               <?php
             }
             ?>
           </div>
         <div>
     </div>
-    
+
           </body>
           </html>
-                

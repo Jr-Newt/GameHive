@@ -1,10 +1,11 @@
 <?php
 // Include config file
 require_once "config.php";
+error_reporting( error_reporting() & ~E_NOTICE );
 
 // Define variables and initialize with empty values
-$name = $description = $price = $gearcat = $gearimage = "";
-$name_err = $description_err = $price_err = $gearcat_err = $gearimage_err = "";
+$name = $description = $price = $gearcat = $gearimage = $stock = "";
+$name_err = $description_err = $price_err = $gearcat_err = $gearimage_err = $stock_err ="";
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -35,6 +36,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     } else{
         $price = $input_price;
     }
+    $input_stock = trim($_POST["no_of_stock"]);
+    if(empty($input_stock)){
+        $stock_err = "Please enter the stock available.";
+    } elseif(!ctype_digit($input_stock)){
+        $stock_err = "Please enter a positive integer value.";
+    } else{
+        $stock = $input_stock;
+    }
 
     // Validate category
     $input_gearcat = trim($_POST["gearcat"]);
@@ -49,16 +58,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(!empty($filename)){
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
         $new_filename = $name.'.'.$ext;
-        move_uploaded_file($_FILES['gearimage']['tmp_name'], '../images/'.$new_filename);
+        move_uploaded_file($_FILES['gearimage']['tmp_name'],"C:/xampp/htdocs/gamehive/images/".$new_filename);
     }
     else{
         $new_filename = '';
     }
 
     // Check input errors before inserting in database
-    if(empty($name_err) && empty($description_err) && empty($price_err) && empty($gearcat_err)){
+    if(empty($name_err) && empty($description_err) && empty($price_err) && empty($gearcat_err)&& empty($stock_err)){
         // Prepare an insert statement
-        $sql = "INSERT INTO product (name, description, price, gearcat, gearimage) VALUES (:name, :description, :price, :gearcat, :gearimage)";
+        $sql = "INSERT INTO gearstore (name, description, price, gearcat, gearimage, no_of_stock) VALUES (:name, :description, :price, :gearcat, :gearimage, :stock)";
 
         if($stmt = $pdo->prepare($sql)){
             // Bind variables to the prepared statement as parameters
@@ -67,6 +76,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $stmt->bindParam(":price", $param_price);
             $stmt->bindParam(":gearcat", $param_gearcat);
             $stmt->bindParam(":gearimage", $param_gearimage);
+            $stmt->bindParam(":stock", $param_stock);
 
             // Set parameters
             $param_name = $name;
@@ -74,6 +84,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_price = $price;
             $param_gearcat = $gearcat;
             $param_gearimage = $new_filename;
+            $param_stock = $stock;
 
             // Attempt to execute the prepared statement
             if($stmt->execute()){
@@ -134,6 +145,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <label>Category</label>
                             <input type="text" name="gearcat" class="form-control <?php echo (!empty($gearcat_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $gearcat; ?>">
                             <span class="invalid-feedback"><?php echo $gearcat;?></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Stock</label>
+                            <input type="text" name="no_of_stock" class="form-control <?php echo (!empty($stock_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $stock; ?>">
+                            <span class="invalid-feedback"><?php echo $stock_err;?></span>
                         </div>
                         <tr>
                             <td>Image:<input type="file" name="gearimage" accept="image/jpeg"></td>

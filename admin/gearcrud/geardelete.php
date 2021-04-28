@@ -1,11 +1,12 @@
 <?php
 // Process delete operation after confirmation
+error_reporting( error_reporting() & ~E_NOTICE );
 if(isset($_POST["id"]) && !empty($_POST["id"])){
     // Include config file
     require_once "config.php";
 
     // Prepare a delete statement
-    $sql = "DELETE FROM product WHERE id = :id";
+    $sql = "DELETE FROM gearstore WHERE id = :id";
 
     if($stmt = $pdo->prepare($sql)){
         // Bind variables to the prepared statement as parameters
@@ -61,7 +62,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="alert alert-danger">
                             <input type="hidden" name="id" value="<?php echo trim($_GET["id"]); ?>"/>
-                            <p>Are you sure you want to delete this product?</p>
+                            <p>Are you sure you want to delete this gearstore?</p>
                             <p>
                                 <input type="submit" value="Yes" class="btn btn-danger">
                                 <a href="gearindex.php" class="btn btn-secondary ml-2">No</a>

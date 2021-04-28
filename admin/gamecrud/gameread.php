@@ -1,5 +1,6 @@
 <?php
 // Check existence of id parameter before processing further
+error_reporting( error_reporting() & ~E_NOTICE );
 if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
     // Include config file
     require_once "config.php";
@@ -26,6 +27,8 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                 $description = $row["description"];
                 $price = $row["price"];
                 $gamecat = $row["gamecat"];
+                $gameimage = $row["gameimage"];
+                $mode = $row["mode"];
             } else{
                 // URL doesn't contain valid id parameter. Redirect to error page
                 header("location: gameerror.php");
@@ -84,6 +87,11 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                         <label>Category</label>
                         <p><b><?php echo $row["gamecat"]; ?></b></p>
                     </div>
+                    <div class="form-group">
+                        <label>Mode</label>
+                        <p><b><?php echo $row["mode"]; ?></b></p>
+                    </div>
+
                     <p><a href="gameindex.php" class="btn btn-primary">Back</a></p>
                 </div>
             </div>

@@ -1,7 +1,7 @@
-<?php 
+<?php
 error_reporting( error_reporting() & ~E_NOTICE );
 require_once "controllerUserData.php";
-include "config.php";
+//include "config.php";
 include "connection.php";
 ?>
 <!--?php
@@ -17,7 +17,7 @@ $gearcat = $row1['gearcat'];
 $price1 = $row1['price'];
 $image1 = $row1['gearimage'];
 
-$cartArray = 
+$cartArray =
 	array(
 	'name'=>$name1,
 	'gearcat'=>$gearcat,
@@ -33,7 +33,7 @@ if(empty($_SESSION["shopping_cart"])) {
 	$array_keys = array_keys($_SESSION["shopping_cart"]);
 	if(in_array($gearcat,$array_keys)) {
 		$status = "<div class='box' style='color:red;'>
-		Product is already added to your cart!</div>";	
+		Product is already added to your cart!</div>";
 	} else {
 	$_SESSION["shopping_cart"] = array_merge($_SESSION["shopping_cart"],$cartArray);
 	$status = "<div class='box'>Product is added to your cart!</div>";
@@ -81,29 +81,42 @@ if(empty($_SESSION["shopping_cart"])) {
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="home-page.html"><img src="bee-logo-linear-vector-icon_126523-265.jpg" alt="Logo" style="width:40px;"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <a class="navbar-brand" href="homepagenew.php"><img src="../images/bee-logo-linear-vector-icon_126523-265.jpg" alt="Logo" style="width:40px;"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Game Comb<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Gear Comb</a>
-          </li>
-<li class="nav-item">
-            <a class="nav-link" href="gear_final.php">My Cart</a>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
-        </form>
-      </div>
-    </nav>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="gear_display.php">Gear Comb</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="game_display.php">Game Comb</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><?php echo $_SESSION['name']; ?></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cartfinal.php">My Cart</a>
+            </li>
+
+            </ul>
+            <!--div class="flex-row-reverse"--><ul class="navbar-nav">
+            <li class="nav-item flex-row-reverse">
+              <a class="nav-link" href="logout-user.php">Logout<span class="sr-only">(current)</span></a>
+            </li>
+            </ul>
+
+
+            <!--form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
+            </form-->
+
+
+            </div>
+            </nav>
     <br>
     <?php
     include "config.php";
@@ -145,7 +158,7 @@ if(empty($_SESSION["shopping_cart"])) {
         <div class="header"><h3><?php echo $name;?></h3></div>
         <div class="main-content">
             <div class="prod_image">
-                <img src="..\images\<?php echo $image;?>" alt="">
+                <img src="../images/<?php echo $image;?>" alt="">
             </div>
             <div class="prod_desc">
                 <div class="desc"><p><?php echo $description;?></p></div>
@@ -156,13 +169,13 @@ if(empty($_SESSION["shopping_cart"])) {
             <div class="section2">
             <input type="number" name="quantity" value="1" min="1" max="<?php echo $stock;?>" placeholder="Quantity" required>
             <input type="hidden" name="product_id" value="<?php echo $id;?>">
-            <input type="submit" value="Add To Cart" name="cart" class="btn btn-outline-warning">
+            <input type="submit" value="Add To Cart" name="cart" class="btn btn-outline-warning cartbtn">
             </div>
         </form>
     </div>
     </div>
-            <div class="message_box">
-              <?php echo $msg;?>
-            </div>
+            <!--div class="message_box">
+              <!-?php echo $msg;?>
+            </div-->
 </body>
 </html>

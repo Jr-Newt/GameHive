@@ -26,7 +26,7 @@
     .about{
       display: grid;
       grid-template-columns: 1fr;
-      grid-template-rows: 1fr;
+      /*grid-template-rows: 1fr;*/
       background-color: rgb(255, 197, 5);
       /*border-bottom:1px solid black ;*/
 
@@ -35,7 +35,7 @@
       display: grid;
       background-color: rgb(255, 197, 5);
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: .25fr;
+
       padding-top: 20px;
       text-align: center;
       height: 300px;
@@ -55,12 +55,15 @@
       display: grid;
       background-color: rgb(255, 197, 5);
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: .25fr;
+
       padding-top: 20px;
       text-align:left;
       height: 300px;
       grid-column-gap: 1em;
       /*border-bottom :1px solid black ;*/
+    }
+    .content{
+      display: grid;
     }
 
 
@@ -70,7 +73,7 @@
   <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="home-page.php"><img src="../images/bee-logo-linear-vector-icon_126523-265.jpg" alt="Logo" style="width:40px;"></a>
+      <a class="navbar-brand" href="index.php"><img src="../images/bee-logo-linear-vector-icon_126523-265.jpg" alt="Logo" style="width:40px;"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -78,44 +81,15 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Game Comb<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="login-user.php">Game Comb<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Gear Comb</a>
+            <a class="nav-link" href="login-user.php">Gear Comb</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="login-user.php">Login</a>
           </li>
-            <!--a href="#" onclick= "document.getElementById('id01').style.display='block'" style="width:auto;" class="nav-link">Login</a>
-            <div id="id01" class="modal">
 
-              <form class="modal-content animate" action="/action_page.php" method="post">
-                <div class="imgcontainer">
-                  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-                  <img src="" alt="Avatar" class="avatar">
-                  <h5>LOGIN</h5>
-                </div>
-
-                <div class="container2">
-                <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
-
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
-
-                <button type="submit">Login</button>
-                <label>
-                  <input type="checkbox" checked="checked" name="remember"> Remember me
-                </label>
-              </div>
-
-              <div class="container2" style="background-color:#f1f1f1">
-                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-                <span class="psw">Forgot <a href="#">password?</a></span>
-              </div>
-              </form>
-            </div>
-          </li-->
 
           <li class="nav-item">
             <a class="nav-link" href="#">My Cart</a>
@@ -167,16 +141,18 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
+    <div class="content">
     <div class="about">
         <h1>About Us</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe suscipit aut accusantium optio eum maiores libero repellat non nihil maxime laudantium alias sequi quo similique nesciunt odit, accusamus nemo. Placeat!</p>
-      </div>
+        <p>GAME HIVE is an e-commerce website that sells both gaming gears as well as console games. This is a dream come true moment for many hardcore gamers because life was difficult for us when it comes to gaming. It was really difficult for us to purchase gaming gears in normal websites and games are really expensive. No worries ANYMORE because a BIG hive is here in town!!!. </p>
+    </div>
       <h1 style="background-color: rgb(255, 197, 5);margin: 0;">What We Offer</h1>
       <div class="desc-store-img">
-        <div><h3><a href="#">Gear Store</a></h3><img src="../images/ac.jpg" style="height: 200px;width: 60%;"alt=""></div>
-        <div><h3><a href="#">Game Store</a></h3><img src="../images/pexels-tima-miroshnichenko-5303633.jpg" alt=""style="height: 24%;width: 60%;"></div>
+        <div><h3><a href="game_display.php">Game Store</a></h3><img src="../images/ac.jpg" style="height: 200px;width: 60%;"alt=""></div>
+        <div><h3><a href="gear_display.php">Gear Store</a></h3><img src="../images/pexels-tima-miroshnichenko-5303633.jpg" alt=""style="height: 24%;width: 60%;"></div>
       </div>
       <div class="desc-store-p"><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae quisquam explicabo distinctio totam facere nemo minus optio, amet quidem libero!</p><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus sapiente sint dolorum illum magni animi ullam optio laudantium perferendis esse.</p></div>
+      </div>
       <script>
         // Get the modal
         var modal = document.getElementById('id01');
