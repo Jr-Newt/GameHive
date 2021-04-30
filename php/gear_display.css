@@ -23,12 +23,12 @@ h3{
     width: 35%;
 }
 .section1>.drop>select{
-    
+
     justify-self: end;
     width: 50%;
 }
 .drop{
-    
+
     display: grid;
 }
 .content-body{
@@ -51,7 +51,7 @@ h3{
 .each-product{
     display: grid;
     grid-template-rows: 3fr 0.5fr 0.5fr;
-    
+
 }
 .each-product>image{
 background-color: chartreuse;
@@ -67,7 +67,7 @@ background-color: chartreuse;
 }*/
 .header{
     margin-top: 45px;
-    
+
 }
 h3{
     text-align: center;
@@ -80,21 +80,21 @@ h3{
 .section1>.drop{
     display: grid;
     /*justify-content: end;*/
-    
-    
+
+
 }
 .main-content{
     display: grid;
-    
+
     grid-template-columns: 1fr;
 }
 /*.filter-bar{
-    
+
     display: grid;
     grid-row: 1;
 }*/
 .product-layout{
-    
+
     display: grid;
     grid-template-columns: repeat(4,1fr);
     grid-gap: 1em;
@@ -104,7 +104,6 @@ h3{
     grid-template-rows: 3fr 0.5fr 0.5fr;
     box-shadow: 5px 5px 5px grey;
     transition-duration: 1s;
-    
 }
 /*.each-product{
 transition-property: height;
@@ -122,7 +121,7 @@ transition-property: height;
  .each-product>.name{
         background-color: rgb(255, 197, 5);
         text-align: center;
-        
+
     }
     .each-product>.name>a{
         color:black;
@@ -130,7 +129,7 @@ transition-property: height;
     .each-product>.name>a:hover{
         text-decoration-line: none;
         color: red;
-        
+
     }
  .each-product>.details{
         background-color: rgb(255, 197, 5);
@@ -160,4 +159,3 @@ transition-property: height;
     color: aliceblue;
     text-decoration: aliceblue;
 }
-

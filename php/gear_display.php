@@ -160,7 +160,7 @@ $result = $pdo->query($sql);
               <div class="each-product">
                 <div class="image"><img src="..\images\<?php echo $image;?>" alt="" style="width:100%"></div>
                 <div class="name"><a href="gear_page.php?id=<?php echo $row['id'];?>"><?php echo $name;?></a></div>
-                <div class="details"><?php echo $price;?></div>
+                <div class="details">$<?php echo $price;?></div>
               </div>
 
               <?php
