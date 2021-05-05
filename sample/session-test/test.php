@@ -1,4 +1,9 @@
 <?php
+date_default_timezone_set('Asia/Kolkata');
+$transact = date('y-m-d h:i:s');
+echo var_dump($transact);
+echo str_replace( array(':','-',' '),'', $transact );
+//echo $transact;
 $name = "shaun 123 shaju";
 $input_name = trim($name);
 if(empty($input_name)){

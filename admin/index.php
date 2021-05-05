@@ -11,6 +11,18 @@ error_reporting( error_reporting() & ~E_NOTICE );
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+  body{
+    background-color:rgb(255, 197, 5);
+  }
+    .row.r1{
+      margin-top:60px;
+      margin-bottom:5px;
+    }
+    .row.r2{
+      margin-top:10px;
+    }
+  </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -23,9 +35,6 @@ error_reporting( error_reporting() & ~E_NOTICE );
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a class="nav-link" href="index.php">Dashboard<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Sales</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Users</a>
@@ -63,11 +72,15 @@ if(!empty($_SESSION['admin']))
   {
     $users = $result->rowCount();
 }
-$q2 = "SELECT SUM(price) FROM sales";
-  if($result = $pdo->query($q2))
-  {
-    $sales = $result->rowCount();
-}
+/*$q2 = "SELECT SUM(price) AS sum FROM payments";
+$pdo->prepare($q2);
+$result->execute();
+  
+    $sales = $result->fetch(PDO::FETCH_NUM);*/
+    $soma = $pdo->query("SELECT SUM(price) AS total FROM payments")->fetchColumn();
+
+// Imprimindo o resultado.
+//print $soma;
 $q3 = "SELECT * FROM gamestore";
   if($result = $pdo->query($q3))
   {
@@ -77,11 +90,12 @@ $q4 = "SELECT * FROM gearstore";
   if($result = $pdo->query($q4))
   {
     $products = $result->rowCount();
-}}
+}
+}
 ?>
-<div class="header"><h1>Dashboard</h1></div>
-<div class="row">
-  <div class="col-sm-3">
+<div class="header" style="margin-bottom:10px;"><h1 style="text-align:center;">Overview</h1></div>
+<div class="row r1">
+  <div class="col-sm-6 c1">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">No of users</h5>
@@ -90,7 +104,7 @@ $q4 = "SELECT * FROM gearstore";
       </div>
     </div>
   </div>
-  <div class="col-sm-3">
+  <div class="col-sm-6 c2">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">No of products</h5>
@@ -99,7 +113,9 @@ $q4 = "SELECT * FROM gearstore";
       </div>
     </div>
   </div>
-  <div class="col-sm-3">
+  </div>
+  <div class="row r2">
+  <div class="col-sm-6 c3">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">No of games</h5>
@@ -108,11 +124,11 @@ $q4 = "SELECT * FROM gearstore";
       </div>
     </div>
   </div>
-  <div class="col-sm-3">
+  <div class="col-sm-6 c4">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Total Sales</h5>
-        <p class="card-text"><?php echo $sales;?> </p>
+        <p class="card-text"><?php echo $soma;?> </p>
 
       </div>
     </div>

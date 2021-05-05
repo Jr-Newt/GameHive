@@ -170,6 +170,8 @@ if(empty($_SESSION["shopping_cart"])) {
             <div class="section2">
             <!--input type="number" name="quantity" value="1" min="1" max="<//?php echo $stock;?>" placeholder="Quantity" required-->
             <input type="hidden" name="product_id" value="<?php echo $id;?>">
+            <input type="hidden" name="price" value="<?php echo $price;?>">
+            <input type="hidden" name="quantity" value="1">
             <input type="submit" value="Purchase" name="purchase" class="btn btn-outline-warning">
             </div>
         </form>
@@ -201,19 +203,50 @@ if(empty($_SESSION["shopping_cart"])) {
                     <input type="image" name="submit" border="0" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif">
                 </form>
                 <?php
+                $_SESSION['game'] = $name;
+                date_default_timezone_set('Asia/Kolkata');
+                $trans = date('y-m-d h:i:s');
+                $_SESSION['transact']  = str_replace( array(':','-',' '),'', $trans);
             //unset($_SESSION['cart']);
             include "config.php";
-            $sql = "INSERT INTO sales (user_id, price) VALUES (:user_id, :product_id)";
+
+            $sql = "INSERT INTO orders (user_id,game_id,transact_id,price,qty,status) VALUES (:user_id,:gear_id,:transact_id,:price,:qty,:status)";
             if($stmt = $pdo->prepare($sql)){
               // Bind variables to the prepared statement as parameters
               $stmt->bindParam(":user_id", $user_id);
-              $stmt->bindParam(":product_id", $sub);
-              //$stmt->bindParam(":qty", $qty);
-      
+              $stmt->bindParam(":gear_id", $gear_id);
+              $stmt->bindParam(":transact_id", $transact);
+              $stmt->bindParam(":price", $sub);
+              $stmt->bindParam(":qty", $qty);
+              $stmt->bindParam(":status", $s);
+                $s = 0;
+                $transact = $_SESSION['transact'];
               // Set parameters
               $user_id = $_SESSION['user_id'];
-              $sub= $price;
+              $gear_id = $_POST['product_id'];
+              $qty = $_POST['quantity'];
+              //$transact = date('y-m-d h:i:s');
+              $sub= $_POST['price'];
               $stmt->execute();
+             }
+             $sql = "INSERT INTO payments (user_id,price,transact_id,status) VALUES (:user_id,:price,:transact_id,:status)";
+            if($stmt = $pdo->prepare($sql)){
+              // Bind variables to the prepared statement as parameters
+              $stmt->bindParam(":user_id", $user_id);
+              $stmt->bindParam(":transact_id", $transact);
+              $stmt->bindParam(":price", $sub);
+              $stmt->bindParam(":status", $s);
+
+              // Set parameters
+              $user_id = $_SESSION['user_id'];
+              $s = 0;
+              
+                
+                $transact = $_SESSION['transact'];
+              //$transact = date('y-m-d h:i:s');
+              $sub= $_POST['price'];
+              $stmt->execute();
+
             }
               ?>
    <?php

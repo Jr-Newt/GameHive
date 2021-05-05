@@ -3,6 +3,15 @@
 error_reporting( error_reporting() & ~E_NOTICE );
 include_once 'config.php';
 include "controllerUserData.php";
+
+ $date= $_SESSION['transact'];
+ //echo $date;
+ $t_id = $date;
+ //$t_id = strtotime($t);
+ echo var_dump($t_id);
+ //echo $t_id;
+ //$t_id = date_format($date,"Y-m-d H:i:s");
+ //$t_id = $t_id.'000000';
 //echo $_SESSION['email'];
 
 // Include database connection file
@@ -39,11 +48,69 @@ if(!empty($_GET['item_number']) && !empty($_GET['tx']) && !empty($_GET['amt']) &
 
 <div class="container">
     <div class="status">
-       <?php if(empty($payment_id)){
-          $subject = "confirmation";
-          $message = "Order is confirmed";
+       <?php if(empty($payment_id))
+       {
+         include "config.php";
+          //$transact = date('y-m-d h:i:s');
+          $sql = "UPDATE orders SET  status=:status WHERE transact_id=:t";
+          if($stmt = $pdo->prepare($sql)){
+          $stmt->bindParam(":t", $t);
+          $stmt->bindParam(":status", $s);
+          //$stmt->bindParam(":user_id", $user_id);
+          //$user_id = $_SESSION['user_id'];
+          $t= $t_id;
+          $s=1;
+          $stmt->execute();
+          }
+          //$s = 1;
+          //include "connection.php";
+          //$update = "UPDATE orders SET status = $s WHERE transact_id='$t_id'";
+            //$update_res = mysqli_query($con, $update);
+          $sql = "UPDATE payments SET status=:status WHERE transact_id=:t";
+          if($stmt = $pdo->prepare($sql)){
+          $stmt->bindParam(":status", $s);
+          $stmt->bindParam(":t", $t);
+          //$stmt->bindParam(":user_id", $user_id);
+          //$user_id = $_SESSION['user_id'];
+          $t = $t_id;
+          $s=1;
+          $stmt->execute();
+          }
+          $sql = "SELECT * FROM payments WHERE transact_id=:t";
+          if($stmt = $pdo->prepare($sql)){
+          //$stmt->bindParam(":status", $s);
+          $stmt->bindParam(":t", $t);
+          //$stmt->bindParam(":user_id", $user_id);
+          //$user_id = $_SESSION['user_id'];
+          $t = $t_id;
+          $s=1;
+          if($stmt->execute())
+          {
+          $row = $stmt->fetch(PDO::FETCH_ASSOC);
+          $price = $row['price'];
+          $t= $row['transact_id'];
+          if($row['status']==1){
+            $status = "successful";
+          }
+          else{
+            $status = "failed. Contact admin.";
+          }
+          }
+          
+          }
+          if(!empty($_SESSION['game']))
+          {
+            $subject = "confirmation";
+          $message = "$_SESSION[game] downloadlink will be sent shortly. Enjoy!! \n Your Transaction ID: $t \n Total amt: $price \n Payment Status: $status";
           $sender = "From: gamehiveglobal";
           $email = $_SESSION['email'];
+          }
+          else{
+            $subject = "confirmation";
+          $message = "Order is confirmed \n Your Transaction ID: $t \n Total amt: $price \n Payment Status: $status";
+          $sender = "From: gamehiveglobal";
+          $email = $_SESSION['email'];
+          }
           if(mail($email, $subject, $message, $sender)){
               $info = "We've sent a confirmation details to your email";
             }?>
@@ -51,9 +118,11 @@ if(!empty($_GET['item_number']) && !empty($_GET['tx']) && !empty($_GET['amt']) &
 
             <h1>Payment Succesful</h1>
           <?php
-           echo $_SESSION['cart'];
+           //echo $_SESSION['cart'];
              $_SESSION['cart'] = '';
-             echo $_SESSION['cart'];
+             $_SESSION['game'] = '';
+             
+             //echo $_SESSION['cart'];
 
             ?>
             <a href="homepagenew.php" class="btn btn-primary" style="width:25%;">Home</a>

@@ -50,9 +50,6 @@ include "../connection.php";
         <a class="nav-link" href="../index.php">Dashboard<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Sales</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="#">Users</a>
       </li>
       <li class="nav-item">

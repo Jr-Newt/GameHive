@@ -169,13 +169,11 @@ if(empty($_SESSION["shopping_cart"])) {
             <div class="section2">
             <input type="number" name="quantity" value="1" min="1" max="<?php echo $stock;?>" placeholder="Quantity" required>
             <input type="hidden" name="product_id" value="<?php echo $id;?>">
+            <input type="hidden" name="price" value="<?php echo $price;?>">
             <input type="submit" value="Add To Cart" name="cart" class="btn btn-outline-warning cartbtn">
             </div>
         </form>
     </div>
     </div>
-            <!--div class="message_box">
-              <!-?php echo $msg;?>
-            </div-->
 </body>
 </html>

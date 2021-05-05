@@ -1,5 +1,5 @@
 <?php
-//error_reporting( error_reporting() & ~E_NOTICE );
+error_reporting( error_reporting() & ~E_NOTICE );
 include "controllerUserData.php";
 include "config.php";
 include "connection.php";
@@ -7,61 +7,40 @@ include "cart_config.php";
 
 
 $id = $_SESSION['user_id'];
-/*$query = $pdo->prepare('SELECT * FROM gearstore WHERE id = ?');
+$query = $pdo->prepare('SELECT * FROM gearstore WHERE id = ?');
     $query->execute([$id]);
     if($query->rowCount() > 0){
         $notempty = 1;
     }
     else{
         $notempty = 0;
-    }*/
+    }
 if(isset($_POST['cart']))
     {
-        echo $_POST['price'];
-      /*include "config.php";
-            $sql = "INSERT INTO orders (user_id,gear_id,price,qty,status) VALUES (:user_id,:gear_id,:price,:qty,:status)";
-            if($stmt = $pdo->prepare($sql)){
-              // Bind variables to the prepared statement as parameters
-              $stmt->bindParam(":user_id", $user_id);
-              $stmt->bindParam(":gear_id", $gear_id);
-              //$stmt->bindParam(":transact_id", $transact);
-              $stmt->bindParam(":price", $sub);
-              $stmt->bindParam(":qty", $qty);
-              $stmt->bindParam(":status", $s);
-                $s = 0;
-              // Set parameters
-              $user_id = $_SESSION['user_id'];
-              $gear_id = $_POST['product_id'];
-              $qty = $_POST['quantity'];
-              //$transact = date('y-m-d h:i:s');
-              $sub= $_POST['price'];
-              $stmt->execute();
-    }*/
+      include "config.php";
+      $sql = "INSERT INTO cart (user_id, product_id, qty) VALUES (:user_id, :product_id, :qty)";
+      if($stmt = $pdo->prepare($sql)){
+        // Bind variables to the prepared statement as parameters
+        $stmt->bindParam(":user_id", $user_id);
+        $stmt->bindParam(":product_id", $product_id);
+        $stmt->bindParam(":qty", $qty);
+
+        // Set parameters
+        $user_id = $_SESSION['user_id'];
+        $product_id = $id;
+        $qty = 1;
+        $stmt->execute();
+
+        // Attempt to execute the prepared statement
+
+            // Records created successfully. Redirect to landing page
     }
+    }
+
 
 // If the user clicked the add to cart button on the product page we can check for the form data
 if (isset($_POST['product_id'], $_POST['quantity']) && is_numeric($_POST['product_id']) && is_numeric($_POST['quantity'])) {
     // Set the post variables so we easily identify them, also make sure they are integer
-    $sql = "INSERT INTO orders (user_id,gear_id,price,qty,status) VALUES (:user_id,:gear_id,:price,:qty,:status)";
-            if($stmt = $pdo->prepare($sql)){
-              // Bind variables to the prepared statement as parameters
-              $stmt->bindParam(":user_id", $user_id);
-              $stmt->bindParam(":gear_id", $gear_id);
-              //$stmt->bindParam(":transact_id", $transact);
-              $stmt->bindParam(":price", $sub);
-              $stmt->bindParam(":qty", $qty);
-              $stmt->bindParam(":status", $s);
-                $s = 0;
-              // Set parameters
-              $user_id = $_SESSION['user_id'];
-              $gear_id = $_POST['product_id'];
-              $qty = $_POST['quantity'];
-              //$transact = date('y-m-d h:i:s');
-              $sub= $_POST['price'];
-              $stmt->execute();
-    }
-    
-    
     $product_id = (int)$_POST['product_id'];
     $quantity = (int)$_POST['quantity'];
     // Prepare the SQL statement, we basically are checking if the product exists in our databaser
@@ -118,7 +97,6 @@ if (isset($_POST['update']) && isset($_SESSION['cart'])) {
 $products_in_cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : array();
 $products = array();
 $subtotal = 0.00;
-$total_qty = 0;
 // If there are products in cart
 if ($products_in_cart) {
     // There are products in the cart so we need to select those products from the database
@@ -132,9 +110,7 @@ if ($products_in_cart) {
     // Calculate the subtotal
     foreach ($products as $product) {
         $subtotal += (float)$product['price'] * (int)$products_in_cart[$product['id']];
-        $total_qty+=(int)$products_in_cart[$product['id']];
     }
-    //echo $total_qty;
 }
 ?>
 <html>
@@ -229,7 +205,6 @@ if ($products_in_cart) {
         <div class="section2">
         <div class="subtotal">
             <label for="" class="from-control">subtotal:</label>
-            <!--?php echo $_POST['price'];?-->
             <span class="price">$<?php echo $subtotal.''.PAYPAL_CURRENCY;?></span>
         </div>
         <div class="buttons">
@@ -272,47 +247,19 @@ if ($products_in_cart) {
                     <input type="image" name="submit" border="0" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif">
                 </form>
             <?php
-           //unset($_SESSION['cart']);
-           include "config.php";
-            $sql = "INSERT INTO payments (user_id,price,transact_id,status) VALUES (:user_id,:price,:transact_id,:status)";
+            unset($_SESSION['cart']);
+            include "config.php";
+            $sql = "INSERT INTO orders (user_id, price) VALUES (:user_id, :product_id)";
             if($stmt = $pdo->prepare($sql)){
               // Bind variables to the prepared statement as parameters
               $stmt->bindParam(":user_id", $user_id);
-              $stmt->bindParam(":transact_id", $transact);
-              $stmt->bindParam(":price", $sub);
-              $stmt->bindParam(":status", $s);
+              $stmt->bindParam(":product_id", $sub);
+              //$stmt->bindParam(":qty", $qty);
 
               // Set parameters
               $user_id = $_SESSION['user_id'];
-              $s = 0;
-              date_default_timezone_set('Asia/Kolkata');
-                $trans = date('y-m-d h:i:s');
-                $_SESSION['transact']  = str_replace( array(':','-',' '),'', $trans);
-                
-                $transact = $_SESSION['transact'];
-              //$transact = date('y-m-d h:i:s');
               $sub= $subtotal;
               $stmt->execute();
-
-            }
-
-            $sql = "UPDATE orders SET transact_id = :transact_id WHERE user_id=:user_id AND status = :status";
-            if($stmt = $pdo->prepare($sql)){
-              // Bind variables to the prepared statement as parameters
-              $stmt->bindParam(":user_id", $user_id);
-              $stmt->bindParam(":transact_id", $transact);
-              //$stmt->bindParam(":price", $sub);
-              $stmt->bindParam(":status", $s);
-
-              // Set parameters
-              $user_id = $_SESSION['user_id'];
-              $s = 0;
-              //date_default_timezone_set('Asia/Kolkata');
-                $transact = $_SESSION['transact'];
-              //$transact = date('y-m-d h:i:s');
-              //$sub= $subtotal;
-              $stmt->execute();
-
             }
               ?>
    <?php
