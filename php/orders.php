@@ -10,14 +10,45 @@ require_once "config.php";?>
     <meta charset="UTF-8">
     <title>Create Record</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <style>
         .wrapper{
             width: 600px;
             margin: 0 auto;
+            margin-top: 50px;
         }
     </style>
 </head>
 <body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+          <a class="navbar-brand" href="homepagenew.php"><img src="../images/bee-logo-linear-vector-icon_126523-265.jpg" alt="Logo" style="width:40px;"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="gear_display.php">Gear Comb</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="game_display.php">Game Comb</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"><?php echo $_SESSION['name']; ?></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-cart2" style="font-size: 1.28em;"></i></a>
+              </li>
+
+              </ul>
+              <!--div class="flex-row-reverse"--><ul class="navbar-nav">
+              <li class="nav-item flex-row-reverse">
+                <a class="nav-link" href="logout-user.php">Logout<span class="sr-only">(current)</span></a>
+              </li>
+              </ul>
+              </div>
+              </nav>
     <div class="wrapper">
         <div class="container-fluid">
             <div class="row">
@@ -25,7 +56,7 @@ require_once "config.php";?>
                     <h2 class="mt-5">My Orders</h2>
                     <p>Please enter the transaction ID that you recieved in your mail.</p>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
-                       
+
                         <div class="form-group">
                             <label>Transaction ID</label>
                             <input type="text" name="transact" class="form-control <?php echo (!empty($transact_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $transact; ?>">
@@ -76,7 +107,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                     /* Fetch result row as an associative array. Since the result set
                                     contains only one row, we don't need to use while loop */
                                     $r = $result->fetch(PDO::FETCH_ASSOC);
-                    
+
                                     // Retrieve individual field value
                                     $name = $r["name"];
                                     $description = $r["description"];
@@ -99,7 +130,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                     /* Fetch result row as an associative array. Since the result set
                                     contains only one row, we don't need to use while loop */
                                     $r = $result->fetch(PDO::FETCH_ASSOC);
-                    
+
                                     // Retrieve individual field value
                                     $name = $r["name"];
                                     $description = $r["description"];
@@ -140,8 +171,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <?php
                 }
             }
-                
-                
+
+
         }
     }
 }}

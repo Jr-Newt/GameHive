@@ -7,6 +7,7 @@ error_reporting( error_reporting() & ~E_NOTICE ); ?>
     <title>Login Form</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style1.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -27,7 +28,7 @@ error_reporting( error_reporting() & ~E_NOTICE ); ?>
             <a class="nav-link" href="login-user.php">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">My Cart</a>
+            <a class="nav-link" href="#"><i class="bi bi-cart2" style="font-size: 1.28em;"></i></a>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">

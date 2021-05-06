@@ -8,7 +8,6 @@ include "controllerUserData.php";
  //echo $date;
  $t_id = $date;
  //$t_id = strtotime($t);
- echo var_dump($t_id);
  //echo $t_id;
  //$t_id = date_format($date,"Y-m-d H:i:s");
  //$t_id = $t_id.'000000';
@@ -96,12 +95,12 @@ if(!empty($_GET['item_number']) && !empty($_GET['tx']) && !empty($_GET['amt']) &
             $status = "failed. Contact admin.";
           }
           }
-          
+
           }
           if(!empty($_SESSION['game']))
           {
             $subject = "confirmation";
-          $message = "$_SESSION[game] downloadlink will be sent shortly. Enjoy!! \n Your Transaction ID: $t \n Total amt: $price \n Payment Status: $status";
+          $message = "$_SESSION[game] download link will be sent shortly. Enjoy!! \n Your Transaction ID: $t \n Total amt: $price \n Payment Status: $status";
           $sender = "From: gamehiveglobal";
           $email = $_SESSION['email'];
           }
@@ -121,7 +120,7 @@ if(!empty($_GET['item_number']) && !empty($_GET['tx']) && !empty($_GET['amt']) &
            //echo $_SESSION['cart'];
              $_SESSION['cart'] = '';
              $_SESSION['game'] = '';
-             
+
              //echo $_SESSION['cart'];
 
             ?>

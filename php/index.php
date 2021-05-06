@@ -28,6 +28,7 @@
       grid-template-columns: 1fr;
       /*grid-template-rows: 1fr;*/
       background-color: rgb(255, 197, 5);
+      margin-bottom: 0%;
       /*border-bottom:1px solid black ;*/
 
     }
