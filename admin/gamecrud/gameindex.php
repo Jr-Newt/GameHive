@@ -39,7 +39,7 @@ include "../connection.php";
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="../index.php"><img src="../images/bee-logo-linear-vector-icon_126523-265.jpg" alt="LOGO" style="width:30px;"></a>
+  <a class="navbar-brand" href="../index.php"><img src="/gamehive/images/bee-logo-linear-vector-icon_126523-265.jpg" alt="LOGO" style="width:30px;"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>

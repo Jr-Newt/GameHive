@@ -2,7 +2,8 @@
 error_reporting( error_reporting() & ~E_NOTICE );
  include "controllerUserData.php";
  include "config.php";
-?><html>
+?>
+<html>
 <head><title>gear page</title>
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
