@@ -60,8 +60,8 @@ if (isset($_POST['product_id'], $_POST['quantity']) && is_numeric($_POST['produc
               $sub= $_POST['price'];
               $stmt->execute();
     }
-    
-    
+
+
     $product_id = (int)$_POST['product_id'];
     $quantity = (int)$_POST['quantity'];
     // Prepare the SQL statement, we basically are checking if the product exists in our databaser
@@ -147,6 +147,7 @@ if ($products_in_cart) {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="cart_style2.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -167,7 +168,7 @@ if ($products_in_cart) {
               <a class="nav-link" href="#"><?php echo $_SESSION['name']; ?></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">My Cart</a>
+              <a class="nav-link" href="#"><i class="bi bi-cart2" style="font-size: 1.28em;"></i></a>
             </li>
 
             </ul>
@@ -288,7 +289,7 @@ if ($products_in_cart) {
               date_default_timezone_set('Asia/Kolkata');
                 $trans = date('y-m-d h:i:s');
                 $_SESSION['transact']  = str_replace( array(':','-',' '),'', $trans);
-                
+
                 $transact = $_SESSION['transact'];
               //$transact = date('y-m-d h:i:s');
               $sub= $subtotal;

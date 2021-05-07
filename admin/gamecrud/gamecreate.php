@@ -64,7 +64,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(!empty($filename)){
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
         $new_filename = $name.'.'.$ext;
-        move_uploaded_file($_FILES['gameimage']['tmp_name'], 'C:/xampp/htdocs/gamehive/images'.$new_filename);
+        move_uploaded_file($_FILES['gameimage']['tmp_name'], "C:/xampp/htdocs/gamehive/images/".$new_filename);
     }
     else{
         $new_filename = '';

@@ -39,6 +39,7 @@ $password = $_SESSION['password'];
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
   <style>
     body{
       background-color: rgb(255, 197, 5);
@@ -129,7 +130,7 @@ $password = $_SESSION['password'];
         </div>
       </li>
             <li class="nav-item">
-              <a class="nav-link" href="cartfinal.php">My Cart</a>
+              <a class="nav-link" href="cartfinal.php"><i class="bi bi-cart2" style="font-size: 1.28em;"></i></a>
             </li>
 
             </ul>
