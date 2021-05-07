@@ -88,7 +88,7 @@ error_reporting( error_reporting() & ~E_NOTICE );
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Filter</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -107,19 +107,19 @@ error_reporting( error_reporting() & ~E_NOTICE );
         <label for="">price range</label>
         <select class="form-control" name="minprice">
                 <option value="">Select Price Range</option>
-                <option value="range1">Rs. 500</option>
-                <option value="range2">Rs. 1000</option>
-				<option value="range3">Rs 5000</option>
-                <option value="range4">Rs 10000</option>
-                <option value="range5">Rs 15000</option>
+                <option value="range1">$ 500</option>
+                <option value="range2">$ 1000</option>
+				<option value="range3">$ 5000</option>
+                <option value="range4">$ 10000</option>
+                <option value="range5">$ 15000</option>
             </select>
             <select class="form-control" name="maxprice">
                 <option value="">Select Price Range</option>
-                <option value="range1">Rs. 1000</option>
-                <option value="range2">Rs. 15000</option>
-				<option value="range3">Rs 20000</option>
-                <option value="range4">Rs 40000</option>
-                <option value="range5">Rs 40000+</option>
+                <option value="range1">$ 1000</option>
+                <option value="range2">$ 15000</option>
+				<option value="range3">$ 20000</option>
+                <option value="range4">$ 40000</option>
+                <option value="range5">$ 40000+</option>
             </select>
         </div>
         <div class="form-group">
