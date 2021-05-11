@@ -12,6 +12,7 @@ include "config.php";
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="gear_display.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
 </head>
 <body>
   <?php
@@ -20,7 +21,7 @@ include "config.php";
   $result = $pdo->query($sql);
   ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="homepagenew.php"><img src="../images/bee-logo-linear-vector-icon_126523-265.jpg" alt="Logo" style="width:40px;"></a>
+        <a class="navbar-brand" href="homepagenew.php"><img src="../images/g.png" alt="Logo" style="width:40px;"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -33,11 +34,20 @@ include "config.php";
             <li class="nav-item">
               <a class="nav-link" href="game_display.php">Game Comb</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#"><?php echo $_SESSION['name']; ?></a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded = "false">
+                <?php echo $_SESSION['name']; ?>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <!--a class="dropdown-item" href="user_profile.php?id=<!?php echo $_SESSION['user_id'];?>">Profile</a-->
+                <a class="dropdown-item" href="user_profile.php">Profile</a>
+                <a class="dropdown-item" href="orders.php">My orders</a>
+                <div class="dropdown-divider"></div>
+                <!--a class="dropdown-item" href="#">Something else here</a-->
+              </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="cartfinal.php">My Cart</a>
+              <a class="nav-link" href="cartfinal.php"><i class="bi bi-cart2" style="font-size: 1.28em;"></i></a>
             </li>
 
             </ul>

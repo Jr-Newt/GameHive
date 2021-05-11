@@ -9,6 +9,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+
   <style>
     body{
       background-color: rgb(255, 197, 5);
@@ -72,7 +74,7 @@
   <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="index.php"><img src="../images/bee-logo-linear-vector-icon_126523-265.jpg" alt="Logo" style="width:40px;"></a>
+      <a class="navbar-brand" href="index.php"><img src="../images/G.png" alt="Logo" style="width:40px;"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -91,7 +93,7 @@
 
 
           <li class="nav-item">
-            <a class="nav-link" href="#">My Cart</a>
+            <a class="nav-link" href="login-user.php"><i class="bi bi-cart2" style="font-size: 1.28em;"></i></a>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
