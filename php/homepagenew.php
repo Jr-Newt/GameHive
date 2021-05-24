@@ -7,25 +7,6 @@ error_reporting( error_reporting() & ~E_NOTICE );
 $name = $_SESSION['name'];
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
-/*if($email != false && $password != false){
-    $sql = "SELECT * FROM usertable WHERE email = '$email'";
-    $run_Sql = mysqli_query($con, $sql);
-    if($run_Sql){
-        $fetch_info = mysqli_fetch_assoc($run_Sql);
-        $name=$fetch_info['name'];
-        $status = $fetch_info['status'];
-        $code = $fetch_info['code'];
-        if($status == "verified"){
-            if($code != 0){
-                header('Location: reset-code.php');
-            }
-        }else{
-            header('Location: user-otp.php');
-        }
-    }
-}else{
-    header('Location: login-user.php');
-}*/
 ?>
 
 <html>
