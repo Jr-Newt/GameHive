@@ -90,7 +90,15 @@ if (isset($_POST['product_id'], $_POST['quantity']) && is_numeric($_POST['produc
     exit;
 }
 if (isset($_GET['remove']) && is_numeric($_GET['remove']) && isset($_SESSION['cart']) && isset($_SESSION['cart'][$_GET['remove']])) {
-    // Remove the product from the shopping cart
+  $del = "DELETE FROM orders WHERE gear_id=:id";
+  if($stmt = $pdo->prepare($del)){
+    $stmt->bindParam(":id", $p_id);
+    //$stmt->bindParam(":user_id", $user_id);
+    //$user_id = $_SESSION['user_id'];
+   $p_id = $_GET['remove'];
+    $stmt->execute();
+    }
+  // Remove the product from the shopping cart
     unset($_SESSION['cart'][$_GET['remove']]);
 }
 if (isset($_POST['update']) && isset($_SESSION['cart'])) {
@@ -103,6 +111,16 @@ if (isset($_POST['update']) && isset($_SESSION['cart'])) {
             if (is_numeric($id) && isset($_SESSION['cart'][$id]) && $quantity > 0) {
                 // Update new quantity
                 $_SESSION['cart'][$id] = $quantity;
+                $upd = "UPDATE orders SET qty=:qty WHERE gear_id=:id";
+                if($stmt = $pdo->prepare($upd)){
+                  $stmt->bindParam(":id", $p_id);
+                  $stmt->bindParam(":qty", $p_quantity);
+                  //$stmt->bindParam(":user_id", $user_id);
+                  //$user_id = $_SESSION['user_id'];
+                 $p_id = $id;
+                 $p_quantity = $quantity;
+                  $stmt->execute();
+                  }
             }
         }
     }
