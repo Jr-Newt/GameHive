@@ -75,13 +75,14 @@ error_reporting( error_reporting() & ~E_NOTICE );
           <div><!--button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Filters</button--><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   Filters
 </button></div>
-            <div class="drop">
+            <!--div class="drop">
               <select id="category"   class="form-control">
                 <option selected>Sort</option>
                 <option>...</option>
               </select>
-            </div>
+            </div-->
         </div>
+        
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

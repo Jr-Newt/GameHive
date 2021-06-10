@@ -45,8 +45,7 @@ if(!empty($_GET['item_number']) && !empty($_GET['tx']) && !empty($_GET['amt']) &
 }
 ?>*/?>
 
-<div class="container">
-    <div class="status">
+
        <?php if(empty($payment_id))
        {
          include "config.php";
@@ -113,9 +112,44 @@ if(!empty($_GET['item_number']) && !empty($_GET['tx']) && !empty($_GET['amt']) &
           if(mail($email, $subject, $message, $sender)){
               $info = "We've sent a confirmation details to your email";
             }?>
-            <h1 class="success"><?php echo $info;?></h1>
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+            <title>Success</title>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+              <style>
+              .ack{
+                margin-top:20px;
+                display:grid;
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr;
+                justify-content: center;
+                margin-bottom:30px;
+              }
+              .card{
+                justify-self: center;
+              }
+              </style>
 
-            <h1>Payment Succesful</h1>
+            </head>
+            <body>
+              
+            <h1 style="text-align:center;">Payment Succesful</h1>
+            <!--h1></h1-->
+            <div class="ack">
+              <div class="card" style="width: 18rem;">
+                <img src="..\images\check.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <p class="card-text"><?php echo $info;?></p>
+                </div>
+              </div>
+            </div>
+            
           <?php
            //echo $_SESSION['cart'];
              $_SESSION['cart'] = '';
@@ -127,3 +161,5 @@ if(!empty($_GET['item_number']) && !empty($_GET['tx']) && !empty($_GET['amt']) &
             <a href="homepagenew.php" class="btn btn-primary" style="width:25%;">Home</a>
 		<?php
     }?>
+     </body>
+            </html>

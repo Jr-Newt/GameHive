@@ -163,7 +163,7 @@ if(empty($_SESSION["shopping_cart"])) {
             </div>
             <div class="prod_desc">
                 <div class="desc"><p><?php echo $description;?></p></div>
-                <div class="price">Rs.<?php echo $price;?></div>
+                <div class="price">$<?php echo $price;?></div>
             </div>
         </div>
         <form action=" " method="post">

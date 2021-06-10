@@ -75,12 +75,12 @@ include "config.php";
           <div><!--button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Filters</button--><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   Filters
 </button></div>
-            <div class="drop">
+            <!--div class="drop">
               <select id="category"   class="form-control">
                 <option selected>Sort</option>
                 <option>...</option>
               </select>
-            </div>
+            </div-->
         </div>
 
 <!-- Modal -->
@@ -107,19 +107,19 @@ include "config.php";
         <label for="">price range</label>
         <select class="form-control" name="minprice">
                 <option value="">Select Price Range</option>
-                <option value="range1">Rs. 500</option>
-                <option value="range2">Rs. 1000</option>
-				<option value="range3">Rs 5000</option>
-                <option value="range4">Rs 10000</option>
-                <option value="range5">Rs 15000</option>
+                <option value="range1">$ 500</option>
+                <option value="range2">$ 1000</option>
+				<option value="range3">$ 5000</option>
+                <option value="range4">$ 10000</option>
+                <option value="range5">$ 15000</option>
             </select>
             <select class="form-control" name="maxprice">
                 <option value="">Select Price Range</option>
-                <option value="range1">Rs. 1000</option>
-                <option value="range2">Rs. 15000</option>
-				<option value="range3">Rs 20000</option>
-                <option value="range4">Rs 40000</option>
-                <option value="range5">Rs 40000+</option>
+                <option value="range1">$ 1000</option>
+                <option value="range2">$ 15000</option>
+				<option value="range3">$ 20000</option>
+                <option value="range4">$ 40000</option>
+                <option value="range5">$ 40000+</option>
             </select>
         </div>
         <div class="form-group">
@@ -171,7 +171,7 @@ $result = $pdo->query($sql);
               <div class="each-product">
                 <div class="image"><img src="..\images\<?php echo $image;?>" alt="" style="width:100%"></div>
                 <div class="name"><a href="game_page.php?id=<?php echo $row['id'];?>"><?php echo $name;?></a></div>
-                <div class="details"><?php echo $price;?></div>
+                <div class="details">$<?php echo $price;?></div>
               </div>
 
               <?php
