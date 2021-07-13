@@ -1,4 +1,5 @@
 <?php
+error_reporting( error_reporting() & ~E_NOTICE );
 // Include config file
 require_once "config.php";
 
