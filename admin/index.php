@@ -37,9 +37,6 @@ error_reporting( error_reporting() & ~E_NOTICE );
         <a class="nav-link" href="index.php">Dashboard<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Users</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="#"><?php echo $_SESSION['admin'];?></a>
       </li>
       <li class="nav-item dropdown">
@@ -52,6 +49,15 @@ error_reporting( error_reporting() & ~E_NOTICE );
           <div class="dropdown-divider"></div>
           <!--a class="dropdown-item" href="#">Something else here</a-->
         </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="usercrud/userindex.php">Users</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="paycrud/payindex.php">Payments</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="ordercrud/orderindex.php">Orders</a>
       </li>
       <!--li class="nav-item">
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
