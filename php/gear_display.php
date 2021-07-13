@@ -17,7 +17,7 @@ error_reporting( error_reporting() & ~E_NOTICE );
 <body>
   <?php
   include "config.php";
-  $sql = "SELECT * FROM gearstore WHERE no_of_stock>0";
+  $sql = "SELECT * FROM gearstore";
   $result = $pdo->query($sql);
   ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -129,11 +129,12 @@ error_reporting( error_reporting() & ~E_NOTICE );
                 <option value="">Select Category</option>
                 <?php
                   //pdo_connect();
-
-                  while($row = $result->fetch(PDO::FETCH_ASSOC))
+                  $sqlcat = "SELECT gearcat FROM gearstore";
+                   $res = $pdo->query($sqlcat);
+                  while($rowcat = $res->fetch(PDO::FETCH_ASSOC))
                   {
                   ?>
-                  <option value="<?php echo $row['gearcat'];?>"><?php echo $row['gearcat'];?></option>
+                  <option value="<?php echo $rowcat['gearcat'];?>"><?php echo $rowcat['gearcat'];?></option>
                   <?php
                   }
                   ?>
