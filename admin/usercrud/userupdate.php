@@ -3,8 +3,8 @@
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$name = $description = $price = $gamecat = $gameimage = $mode = "";
-$name_err = $description_err = $price_err = $gamecat_err = $gameimage_err = $mode_err = "";
+$name = $email = $address = $phone_no = "";
+$name_err = $email_err = $address_err = $phone_no_err = "";
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -18,67 +18,60 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $name = $input_name;
     }
 
-    $input_mode = strtolower(trim($_POST["mode"]));
-    if(empty($input_mode)){
-        $mode_err = "Please enter the mode of gaming.";
-    } elseif($input_mode!='online'||$input_mode!='offline'){
-        $mode_err = "Please enter the valid online/offline mode of gaming";
-    } else{
-        $mode = $input_mode;
-    }
-
     // Validate address
-    $input_description = trim($_POST["description"]);
-    if(empty($input_description)){
-        $description_err = "Please enter Game description.";
+    $input_email = trim($_POST["email"]);
+    if(empty($input_email)){
+        $email_err = "Please enter the Email address.";
+      } elseif(!filter_var($input_email, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
+          $email_err = "Please enter a valid email.";
     } else{
-        $description = $input_description;
+        $email = $input_email;
     }
 
     // Validate salary
-    $input_price = trim($_POST["price"]);
-    if(empty($input_price)){
-        $price_err = "Please enter the price of game.";
-    } elseif(!ctype_digit($input_price)){
-        $price_err = "Please enter a positive integer value.";
+    $input_phone_no = trim($_POST["phone_no"]);
+    if(empty($input_phone_no)){
+        $phone_no_err = "Please enter the price of game.";
+    } elseif(!ctype_digit($input_phone_no)){
+        $phone_no_err = "Please enter a positive integer value.";
     } else{
-        $price = $input_price;
+        $phone_no = $input_phone_no;
     }
 
     // Validate category
-    $input_gamecat = trim($_POST["gamecat"]);
-    if(empty($input_gamecat)){
-        $gamecat_err = "Please enter game category.";
+    $input_address = trim($_POST["address"]);
+    if(empty($input_address)){
+        $address_err = "Please enter the delivery address.";
     } else{
-        $gamecat = $input_gamecat;
+        $address = $input_address;
     }
 
     // Check input errors before inserting in database
-    if(empty($name_err) && empty($description_err) && empty($price_err) && empty($gamecat_err)&&empty($mode_err)){
+    if(empty($name_err) && empty($email_err) && empty($phone_no_err) && empty($address_err)){
         // Prepare an update statement
-        $sql = "UPDATE gamestore SET name=:name, description=:description, gamecat=:gamecat price=:price, mode=:mode WHERE id=:id";
+        $sql = "UPDATE userlogin SET name=:name, email=:email, address=:address, phone_no=:phone_no WHERE id=:id";
 
         if($stmt = $pdo->prepare($sql)){
             // Bind variables to the prepared statement as parameters
             $stmt->bindParam(":name", $param_name);
-            $stmt->bindParam(":description", $param_description);
-            $stmt->bindParam(":gamecat", $param_gamecat);
-            $stmt->bindParam(":price", $param_price);
+            $stmt->bindParam(":email", $param_email);
+            $stmt->bindParam(":address", $param_address);
+            $stmt->bindParam(":phone_no", $param_phone_no);
             $stmt->bindParam(":id", $param_id);
-            $stmt->bindParam(":mode", $param_mode);
+
 
             // Set parameters
             $param_name = $name;
-            $param_description = $description;
-            $param_gamecat = $gamecat;
-            $param_price = $price;
+            $param_email = $email;
+            $param_address = $address;
+            $param_phone_no = $phone_no;
             $param_id = $id;
-            $param_mode = $mode;
+
 
             // Attempt to execute the prepared statement
             if($stmt->execute()){
                 // Records updated successfully. Redirect to landing page
-                header("location: gameindex.php");
+                header("location: userindex.php");
                 exit();
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
@@ -98,7 +91,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $id =  trim($_GET["id"]);
 
         // Prepare a select statement
-        $sql = "SELECT * FROM gamestore WHERE id = :id";
+        $sql = "SELECT * FROM userlogin WHERE id = :id";
         if($stmt = $pdo->prepare($sql)){
             // Bind variables to the prepared statement as parameters
             $stmt->bindParam(":id", $param_id);
@@ -115,14 +108,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                     // Retrieve individual field value
                     $name = $row["name"];
-                    $description = $row["description"];
-                    $price = $row["price"];
-                    $gamecat= $row["gamecat"];
-                    $gameimage = $row["gameimage"];
-                $mode = $row["mode"];
+                    $email = $row["email"];
+                    $address = $row["address"];
+                    $phone_no= $row["phone_no"];
+
                 } else{
                     // URL doesn't contain valid id. Redirect to error page
-                    header("location: gameerror.php");
+                    header("location: usererror.php");
                     exit();
                 }
 
@@ -138,7 +130,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         unset($pdo);
     }  else{
         // URL doesn't contain id parameter. Redirect to error page
-        header("location: gameerror.php");
+        header("location: usererror.php");
         exit();
     }
 }
@@ -170,29 +162,26 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <input type="text" name="name" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $name; ?>">
                             <span class="invalid-feedback"><?php echo $name_err;?></span>
                         </div>
+
                         <div class="form-group">
-                            <label>Description</label>
-                            <textarea name="description" class="form-control <?php echo (!empty($description_err)) ? 'is-invalid' : ''; ?>"><?php echo $description; ?></textarea>
-                            <span class="invalid-feedback"><?php echo $description_err;?></span>
+                            <label>Email</label>
+                            <input type="text" name="Email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>">
+                            <span class="invalid-feedback"><?php echo $email_err;?></span>
                         </div>
                         <div class="form-group">
-                            <label>Price</label>
-                            <input type="text" name="price" class="form-control <?php echo (!empty($price_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $price; ?>">
-                            <span class="invalid-feedback"><?php echo $price_err;?></span>
+                            <label>Address</label>
+                            <textarea name="Address" class="form-control <?php echo (!empty($address_err)) ? 'is-invalid' : ''; ?>"><?php echo $address; ?></textarea>
+                            <span class="invalid-feedback"><?php echo $address_err;?></span>
                         </div>
                         <div class="form-group">
-                            <label>Category</label>
-                            <input type="text" name="gamecat" class="form-control <?php echo (!empty($gamecat_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $gamecat; ?>">
-                            <span class="invalid-feedback"><?php echo $gamecat;?></span>
+                            <label>Phone</label>
+                            <input type="text" name="phone_no" class="form-control <?php echo (!empty($phone_no_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $phone_no; ?>">
+                            <span class="invalid-feedback"><?php echo $phone_no;?></span>
                         </div>
-                        <div class="form-group">
-                            <label>Mode</label>
-                            <input type="text" name="mode" class="form-control <?php echo (!empty($mode_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $mode; ?>">
-                            <span class="invalid-feedback"><?php echo $mode_err;?></span>
-                        </div>
+
                         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
                         <input type="submit" class="btn btn-primary" value="Submit">
-                        <a href="gameindex.php" class="btn btn-secondary ml-2">Cancel</a>
+                        <a href="userindex.php" class="btn btn-secondary ml-2">Cancel</a>
                     </form>
                 </div>
             </div>

@@ -44,9 +44,6 @@ include "../connection.php";
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="#">Users</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="#"><?php echo $_SESSION['admin'];?></a>
       </li>
       <li class="nav-item dropdown">
@@ -59,6 +56,15 @@ include "../connection.php";
           <div class="dropdown-divider"></div>
           <!--a class="dropdown-item" href="#">Something else here</a-->
         </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/gamehive/admin/usercrud/userindex.php">Users</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/gamehive/admin/paycrud/payindex.php">Payments</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/gamehive/admin/ordercrud/orderindex.php">Orders</a>
       </li>
       <!--li class="nav-item">
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>

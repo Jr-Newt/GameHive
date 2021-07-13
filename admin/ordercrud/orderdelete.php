@@ -5,7 +5,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     require_once "config.php";
 
     // Prepare a delete statement
-    $sql = "DELETE FROM gamestore WHERE id = :id";
+    $sql = "DELETE FROM orders WHERE id = :id";
 
     if($stmt = $pdo->prepare($sql)){
         // Bind variables to the prepared statement as parameters
@@ -17,7 +17,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         // Attempt to execute the prepared statement
         if($stmt->execute()){
             // Records deleted successfully. Redirect to landing page
-            header("location: gameindex.php");
+            header("location: orderindex.php");
             exit();
         } else{
             echo "Oops! Something went wrong. Please try again later.";
@@ -33,7 +33,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     // Check existence of id parameter
     if(empty(trim($_GET["id"]))){
         // URL doesn't contain id parameter. Redirect to error page
-        header("location: gameerror.php");
+        header("location: ordererror.php");
         exit();
     }
 }
@@ -57,14 +57,14 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="mt-5 mb-3">Delete Record</h2>
+                    <h2 class="mt-5 mb-3">Delete Order</h2>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="alert alert-danger">
                             <input type="hidden" name="id" value="<?php echo trim($_GET["id"]); ?>"/>
-                            <p>Are you sure you want to delete this game from store?</p>
+                            <p>Are you sure you want to delete this order?</p>
                             <p>
                                 <input type="submit" value="Yes" class="btn btn-danger">
-                                <a href="gameindex.php" class="btn btn-secondary ml-2">No</a>
+                                <a href="orderindex.php" class="btn btn-secondary ml-2">No</a>
                             </p>
                         </div>
                     </form>

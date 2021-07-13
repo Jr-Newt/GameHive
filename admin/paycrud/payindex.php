@@ -87,27 +87,23 @@ include "../connection.php";
             <div class="row">
                 <div class="col-md-12">
                     <div class="mt-5 mb-3 clearfix">
-                        <h2 class="pull-left">User Details</h2>
-                        <a href="usercreate.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add New Product</a>
+                        <h2 class="pull-left">Payments Details</h2>
+
                     </div>
                     <?php
                     // Include config file
                     require_once "config.php";
 
                     // Attempt select query execution
-                    $sql = "SELECT * FROM userlogin";
+                    $sql = "SELECT * FROM payments";
                     if($result = $pdo->query($sql)){
                         if($result->rowCount() > 0){
                             echo '<table class="table table-bordered table-striped">';
                                 echo "<thead>";
                                     echo "<tr>";
                                         echo "<th>#</th>";
-                                        echo "<th>Name</th>";
-                                        echo "<th>Email</th>";
-                                        echo "<th>Address</th>";
-                                        echo "<th>Phone</th>";
-                                        #echo "<th>Image</th>";
-                                        #echo "<th>Mode</th>";
+                                        echo "<th>Transaction ID</th>";
+                                        echo "<th>Amount</th>";
                                         echo "<th>Action</th>";
                                     echo "</tr>";
                                 echo "</thead>";
@@ -115,16 +111,12 @@ include "../connection.php";
                                 while($row = $result->fetch()){
                                     echo "<tr>";
                                         echo "<td>" . $row['id'] . "</td>";
-                                        echo "<td>" . $row['name'] . "</td>";
-                                        echo "<td>" . $row['email'] . "</td>";
-                                        echo "<td>" . $row['address'] . "</td>";
-                                        echo "<td>" . $row['phone_no'] . "</td>";
-                                        #echo "<td>" . $row['gameimage'] . "</td>";
-                                        #echo "<td>" . $row['mode'] . "</td>";
+                                        echo "<td>" . $row['transact_id'] . "</td>";
+                                        echo "<td>" . $row['price'] . "</td>";
                                         echo "<td>";
-                                            echo '<a href="userread.php?id='. $row['id'] .'" class="mr-0" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
-                                            echo '<a href="userupdate.php?id='. $row['id'] .'" class="mr-0" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                                            echo '<a href="userdelete.php?id='. $row['id'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
+                                            echo '<a href="payread.php?id='. $row['id'] .'" class="mr-0" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
+                                            //echo '<a href="gameupdate.php?id='. $row['id'] .'" class="mr-0" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
+                                            //echo '<a href="gamedelete.php?id='. $row['id'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
                                         echo "</td>";
                                     echo "</tr>";
                                 }

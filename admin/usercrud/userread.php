@@ -5,7 +5,7 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
     require_once "config.php";
 
     // Prepare a select statement
-    $sql = "SELECT * FROM gamestore WHERE id = :id";
+    $sql = "SELECT * FROM userlogin WHERE id = :id";
 
     if($stmt = $pdo->prepare($sql)){
         // Bind variables to the prepared statement as parameters
@@ -23,14 +23,13 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
 
                 // Retrieve individual field value
                 $name = $row["name"];
-                $description = $row["description"];
-                $price = $row["price"];
-                $gamecat = $row["gamecat"];
-                $gameimage = $row["gameimage"];
-                $mode = $row["mode"];
+                $email = $row["email"];
+                $address = $row["address"];
+                $phone_no = $row["phone_no"];
+                
             } else{
                 // URL doesn't contain valid id parameter. Redirect to error page
-                header("location: gameerror.php");
+                header("location: usererror.php");
                 exit();
             }
 
@@ -46,7 +45,7 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
     unset($pdo);
 } else{
     // URL doesn't contain id parameter. Redirect to gameerror page
-    header("location: gameerror.php");
+    header("location: usererror.php");
     exit();
 }
 ?>
@@ -71,27 +70,24 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                 <div class="col-md-12">
                     <h1 class="mt-5 mb-3">View Record</h1>
                     <div class="form-group">
-                        <label>Game</label>
+                        <label>Name</label>
                         <p><b><?php echo $row["name"]; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>Description</label>
-                        <p><b><?php echo $row["description"]; ?></b></p>
+                        <label>Email</label>
+                        <p><b><?php echo $row["email"]; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>Price</label>
-                        <p><b><?php echo $row["price"]; ?></b></p>
+                        <label>Address</label>
+                        <p><b><?php echo $row["address"]; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>Category</label>
-                        <p><b><?php echo $row["gamecat"]; ?></b></p>
-                    </div>
-                    <div class="form-group">
-                        <label>Mode</label>
-                        <p><b><?php echo $row["mode"]; ?></b></p>
+                        <label>Phone</label>
+                        <p><b><?php echo $row["phone_no"]; ?></b></p>
                     </div>
 
-                    <p><a href="gameindex.php" class="btn btn-primary">Back</a></p>
+
+                    <p><a href="userindex.php" class="btn btn-primary">Back</a></p>
                 </div>
             </div>
         </div>
