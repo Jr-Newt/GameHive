@@ -108,7 +108,14 @@ if(!empty($_GET['item_number']) && !empty($_GET['tx']) && !empty($_GET['amt']) &
           $message = "Order is confirmed \n Your Transaction ID: $t \n Total amt: $price \n Payment Status: $status";
           $sender = "From: gamehiveglobal";
           $email = $_SESSION['email'];
-          }
+          $sql = "UPDATE  gearstore INNER JOIN orders ON gearstore.id = orders.gear_id SET gearstore.no_of_stock= gearstore.no_of_stock - orders.qty WHERE transact_id=:t";
+          if($stmt = $pdo->prepare($sql)){
+          $stmt->bindParam(":t", $t);
+          //$stmt->bindParam(":user_id", $user_id);
+          //$user_id = $_SESSION['user_id'];
+          $t = $t_id;
+          $stmt->execute();
+          }}
           if(mail($email, $subject, $message, $sender)){
               $info = "We've sent a confirmation details to your email";
             }?>

@@ -17,7 +17,7 @@ error_reporting( error_reporting() & ~E_NOTICE );
 <body>
   <?php
   include "config.php";
-  $sql = "SELECT * FROM gearstore";
+  $sql = "SELECT * FROM gearstore WHERE no_of_stock>0";
   $result = $pdo->query($sql);
   ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
