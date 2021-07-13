@@ -97,7 +97,38 @@ $q4 = "SELECT * FROM gearstore";
   {
     $products = $result->rowCount();
 }
+$sql = "SELECT * FROM payments WHERE status=:t ORDER BY id DESC";
+          if($stmt = $pdo->prepare($sql)){
+          //$stmt->bindParam(":status", $s);
+          $stmt->bindParam(":t", $t);
+          //$stmt->bindParam(":user_id", $user_id);
+          //$user_id = $_SESSION['user_id'];
+          $t = 1;
+          if($stmt->execute())
+          {
+          $lt = $stmt->fetch(PDO::FETCH_ASSOC);
+          $t= $lt['transact_id'];
+          $p = $lt['price'];
+          $u = $lt['user_id'];
+          }}
 }
+date_default_timezone_set('Asia/Kolkata');
+$trans = date('y-m-d');
+$trans = str_replace( array(':','-',' '),'', $trans);
+
+$sql = "SELECT * FROM payments WHERE status=:t AND transact_id like CONCAT(:trans, '%') ORDER BY id DESC";
+if($stmt = $pdo->prepare($sql)){
+//$stmt->bindParam(":status", $s);
+$stmt->bindParam(":t", $t);
+$stmt->bindParam(":trans", $t2);
+//$stmt->bindParam(":user_id", $user_id);
+//$user_id = $_SESSION['user_id'];
+$t = 1;
+$t2 = $trans;
+if($stmt->execute())
+{
+$rowc = $stmt->rowCount();
+}}
 ?>
 <div class="header" style="margin-bottom:10px;"><h1 style="text-align:center;">Overview</h1></div>
 <div class="row r1">
@@ -134,12 +165,31 @@ $q4 = "SELECT * FROM gearstore";
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Total Sales</h5>
-        <p class="card-text"><?php echo $soma;?> </p>
+        <p class="card-text"><?php echo "$".$soma;?> </p>
 
       </div>
     </div>
   </div>
 </div>
-<div class="graph-section"></div>
+<div class="row r2">
+  <div class="col-sm-6 c3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Purchases Today</h5>
+        <p class="card-text"><?php echo $rowc;?> </p>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 c3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Last Transaction Completed</h5>
+        <p class="card-text"><?php echo "User_ID: ".$u; echo "    ||    Transaction ID: ".$t; echo "    ||    Amt: $".$p;?> </p>
+
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
